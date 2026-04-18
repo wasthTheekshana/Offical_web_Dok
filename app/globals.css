@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────────────────────────
+   BASE
+─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background-color: #F9F8F6;
+  color: #1C1C1C;
+  line-height: 1.5;
+  overflow-x: hidden;
+  cursor: none;          /* hide native cursor site-wide */
+}
+a, button, [role="button"] { cursor: none; }
+
+h1,h2,h3,h4,h5,h6 { line-height: 1.1; letter-spacing: -0.01em; }
+
+/* ───────────────────────────────────────────
+   SCROLLBAR
+─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #F9F8F6; }
+::-webkit-scrollbar-thumb { background: #003B8E; border-radius: 4px; }
+::selection { background: rgba(0,59,142,0.2); color: #003B8E; }
+
+.dark-section { background-color: #003B8E; color: #F9F8F6; }
+.dark-section ::selection { background: rgba(245,166,35,0.4); color: #1C1C1C; }
+.text-stroke { -webkit-text-stroke: 1px #003B8E; color: transparent; }
+
+/* ───────────────────────────────────────────
+   MARQUEE
+─────────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ───────────────────────────────────────────
+   CUSTOM CURSOR — minimal & refined
+─────────────────────────────────────────── */
+
+/* ── Sharp inner dot — snaps to mouse ── */
+.cur-dot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #003B8E;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.18s ease,
+              background 0.2s ease,
+              transform 0.18s ease;
+  will-change: left, top;
+}
+.cur-dot--on { opacity: 1; }
+.cur-dot--hover {
+  background: #F5A623;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* ── Soft outer ring — follows with ease ── */
+.cur-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 59, 142, 0.30);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease,
+              width  0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease;
+  will-change: left, top;
+}
+.cur-ring--on { opacity: 1; }
+.cur-ring--hover {
+  width: 46px;
+  height: 46px;
+  border-color: rgba(245, 166, 35, 0.55);
+}
+
+/* ───────────────────────────────────────────
+   FONT RENDERING
+─────────────────────────────────────────── */
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
