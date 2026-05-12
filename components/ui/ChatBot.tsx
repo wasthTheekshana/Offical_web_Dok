@@ -39,7 +39,7 @@ export default function ChatBot() {
   // Scroll to bottom whenever messages change
   useEffect(() => {
     if (threadRef.current) {
-      threadRef.current.scrollTop = threadRef.current.scrollHeight;
+      threadRef.current.scrollTo({ top: threadRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [messages]);
 
@@ -69,7 +69,11 @@ export default function ChatBot() {
   }
 
   function handleChip(entry: QAEntry) {
-    sendMessage(entry.buttonLabel ?? entry.question);
+    const userMsg: Message = { role: 'user', text: entry.buttonLabel ?? entry.question };
+    const botMsg = entryToMessage(entry);
+    setMessages((prev) => [...prev, userMsg, botMsg]);
+    setShowTopics(false);
+    setInput('');
   }
 
   function handleSubmit(e: React.FormEvent) {
