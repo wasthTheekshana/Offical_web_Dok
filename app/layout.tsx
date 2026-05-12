@@ -8,6 +8,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CustomCursor from '@/components/ui/CustomCursor';
 import SplashScreen from '@/components/shared/SplashScreen';
+import ChatBot from '@/components/ui/ChatBot';
 
 export const metadata: Metadata = {
   title: { default: 'DOK Solutions Lanka — Journey Towards A Smart Era', template: '%s | DOK Solutions Lanka' },
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ChatBot />
       </body>
     </html>
   );
