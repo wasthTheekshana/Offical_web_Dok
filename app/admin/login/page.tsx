@@ -27,7 +27,9 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 [&_*]:cursor-auto">
+    <>
+      <style>{`body,html{cursor:auto!important}.admin-root,.admin-root *{cursor:auto!important}.admin-root a,.admin-root button{cursor:pointer!important}.admin-root input[type=text],.admin-root input[type=email],.admin-root input[type=password]{cursor:text!important}`}</style>
+      <div className="admin-root min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <div className="mb-8 text-center">
           <span className="font-serif text-2xl text-[#003B8E]">DOK Admin</span>
@@ -72,5 +74,6 @@ export default function AdminLogin() {
         </form>
       </div>
     </div>
+    </>
   );
 }

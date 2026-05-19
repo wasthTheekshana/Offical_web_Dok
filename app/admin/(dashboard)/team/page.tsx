@@ -2,10 +2,83 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { Pencil, Trash2, Plus, X } from 'lucide-react';
+import { Pencil, Trash2, Plus, X, GripVertical } from 'lucide-react';
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  useSortable,
+  arrayMove,
+  rectSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 type Member = { id: string; name: string; role: string; bio: string; photo_url: string };
 const empty: Omit<Member, 'id'> = { name: '', role: '', bio: '', photo_url: '' };
+
+function SortableCard({
+  m,
+  onEdit,
+  onDelete,
+}: {
+  m: Member;
+  onEdit: (m: Member) => void;
+  onDelete: (id: string) => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: m.id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 10 : undefined,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+      <div className="relative">
+        {m.photo_url ? (
+          <img src={m.photo_url} alt={m.name} className="w-full h-40 object-cover object-top" />
+        ) : (
+          <div className="w-full h-40 bg-gray-100 flex items-center justify-center text-gray-300 text-4xl font-serif">
+            {m.name[0]}
+          </div>
+        )}
+        <button
+          {...attributes}
+          {...listeners}
+          className="absolute top-2 right-2 p-1.5 bg-white/80 backdrop-blur-sm rounded-lg text-gray-400 hover:text-gray-600 cursor-grab active:cursor-grabbing"
+          title="Drag to reorder"
+        >
+          <GripVertical size={14} />
+        </button>
+      </div>
+      <div className="p-4">
+        <p className="font-semibold text-gray-900 text-sm">{m.name}</p>
+        <p className="text-gray-400 text-xs mt-0.5">{m.role}</p>
+        <div className="flex gap-2 mt-3">
+          <button
+            onClick={() => onEdit(m)}
+            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#003B8E] border border-gray-200 hover:border-[#003B8E]/30 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            <Pencil size={12} /> Edit
+          </button>
+          <button
+            onClick={() => onDelete(m.id)}
+            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-red-600 border border-gray-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            <Trash2 size={12} /> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function AdminTeamPage() {
   const [members, setMembers] = useState<Member[]>([]);
@@ -15,6 +88,8 @@ export default function AdminTeamPage() {
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   async function load() {
     const res = await fetch('/api/admin/team');
@@ -31,7 +106,7 @@ export default function AdminTeamPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ bucket: 'team-photos', path }),
     });
-    const { signedUrl, token } = await res.json();
+    const { signedUrl } = await res.json();
     await fetch(signedUrl, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } });
     const supabase = createClient();
     const { data } = supabase.storage.from('team-photos').getPublicUrl(path);
@@ -67,7 +142,7 @@ export default function AdminTeamPage() {
       await fetch('/api/admin/team', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, display_order: members.length }),
       });
     }
     setSaving(false);
@@ -81,12 +156,28 @@ export default function AdminTeamPage() {
     load();
   }
 
+  async function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = members.findIndex(m => m.id === active.id);
+    const newIndex = members.findIndex(m => m.id === over.id);
+    const reordered = arrayMove(members, oldIndex, newIndex);
+    setMembers(reordered);
+
+    await fetch('/api/admin/team/reorder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(reordered.map((m, i) => ({ id: m.id, display_order: i }))),
+    });
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">Team Members</h1>
-          <p className="text-gray-400 text-sm mt-1">{members.length} members</p>
+          <p className="text-gray-400 text-sm mt-1">{members.length} members · drag to reorder</p>
         </div>
         <button
           onClick={openAdd}
@@ -96,39 +187,15 @@ export default function AdminTeamPage() {
         </button>
       </div>
 
-      {/* Member grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {members.map(m => (
-          <div key={m.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-            {m.photo_url && (
-              <img src={m.photo_url} alt={m.name} className="w-full h-40 object-cover object-top" />
-            )}
-            {!m.photo_url && (
-              <div className="w-full h-40 bg-gray-100 flex items-center justify-center text-gray-300 text-4xl font-serif">
-                {m.name[0]}
-              </div>
-            )}
-            <div className="p-4">
-              <p className="font-semibold text-gray-900 text-sm">{m.name}</p>
-              <p className="text-gray-400 text-xs mt-0.5">{m.role}</p>
-              <div className="flex gap-2 mt-3">
-                <button
-                  onClick={() => openEdit(m)}
-                  className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#003B8E] border border-gray-200 hover:border-[#003B8E]/30 px-3 py-1.5 rounded-lg transition-colors"
-                >
-                  <Pencil size={12} /> Edit
-                </button>
-                <button
-                  onClick={() => setDeleteId(m.id)}
-                  className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-red-600 border border-gray-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-colors"
-                >
-                  <Trash2 size={12} /> Delete
-                </button>
-              </div>
-            </div>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={members.map(m => m.id)} strategy={rectSortingStrategy}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {members.map(m => (
+              <SortableCard key={m.id} m={m} onEdit={openEdit} onDelete={setDeleteId} />
+            ))}
           </div>
-        ))}
-      </div>
+        </SortableContext>
+      </DndContext>
 
       {/* Delete confirmation */}
       {deleteId && (
