@@ -25,9 +25,9 @@ export default function AboutAbans() {
           >
             <div className="rounded-[2.5rem] overflow-hidden h-[400px] lg:h-[520px]">
               <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=1000&fit=crop&auto=format&q=80"
-                alt="Abans Group Building"
-                className="w-full h-full object-cover opacity-70"
+                src="/images/building.jpg"
+                alt="DOK Solutions Headquarters"
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#080C1A]/60 to-transparent" />
             </div>
@@ -55,7 +55,7 @@ export default function AboutAbans() {
               className="font-serif text-5xl lg:text-6xl text-white leading-[1.1] mb-8"
             >
               Proudly Part of<br />
-              <span className="text-[#F5A623]">The Abans Group</span>
+              <span className="text-[#F5A623]">AB Securitas (Pvt) Ltd</span>
             </motion.h2>
 
             <motion.p
@@ -65,10 +65,10 @@ export default function AboutAbans() {
               transition={{ delay: 0.2, duration: 0.75 }}
               className="text-white/45 font-light text-base leading-relaxed mb-10"
             >
-              DOK Solutions Lanka operates within the Abans Group — one of Sri Lanka's largest 
-              and most trusted conglomerates. This heritage provides us with the financial 
-              stability, governance standards, and institutional credibility that our enterprise 
-              clients rely on for long-term partnerships.
+              DOK Solutions Lanka is a fully owned subsidiary of AB Securitas (Pvt) Ltd —
+              one of Sri Lanka's most trusted and established holding companies. This heritage
+              provides us with the financial stability, governance standards, and institutional
+              credibility that our enterprise clients rely on for long-term partnerships.
             </motion.p>
 
             {/* Row of mini stats */}

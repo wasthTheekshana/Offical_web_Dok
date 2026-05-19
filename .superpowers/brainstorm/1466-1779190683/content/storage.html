@@ -1,0 +1,43 @@
+<h2>Where should uploaded images and data be stored?</h2>
+<p class="subtitle">This decides what free accounts you'll need to create</p>
+
+<div class="options">
+
+  <div class="option" data-choice="supabase" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Supabase — Free <span style="background:#22c55e;color:#fff;font-size:10px;padding:2px 8px;border-radius:99px;margin-left:6px;font-weight:700;">Recommended</span></h3>
+      <p>One free account at <strong>supabase.com</strong> handles everything — database (team, services, blog, clients, contact) and image file storage. Industry standard, very reliable, free up to 500MB storage and 50,000 rows.</p>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ One account for everything</span>
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Images + database together</span>
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Free forever for small sites</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="cloudinary" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Cloudinary (images) + JSON files (data)</h3>
+      <p>Images uploaded to <strong>Cloudinary</strong> (free image CDN with auto-resize). All other data (team, blog, services) saved as JSON files in the project. Simple but data is stored in code — needs a redeploy to persist across server restarts.</p>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#fef9c3;color:#854d0e;border:1px solid #fef08a;padding:3px 10px;border-radius:99px;font-size:12px">⚠ Data lost on redeploy</span>
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Great image optimization</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="local" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Local only (no external accounts)</h3>
+      <p>Everything saved directly on the server — images to <code>public/uploads/</code>, data to JSON files. Works with no accounts. Fine if the website runs on a dedicated server, but changes are lost if the hosting platform resets the file system (common on Vercel/Netlify).</p>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca;padding:3px 10px;border-radius:99px;font-size:12px">✗ Lost on Vercel/Netlify deploy</span>
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ No accounts needed</span>
+      </div>
+    </div>
+  </div>
+
+</div>

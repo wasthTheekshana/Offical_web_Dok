@@ -1,0 +1,70 @@
+<h2>Where should the chat widget live?</h2>
+<p class="subtitle">Pick the layout that feels right for DOK Solutions Lanka</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f0f4ff;padding:16px;min-height:180px;position:relative;border-radius:8px;overflow:hidden">
+      <!-- Floating bubble bottom-right -->
+      <div style="position:absolute;bottom:12px;right:12px;width:44px;height:44px;border-radius:50%;background:#003B8E;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,59,142,0.4)">
+        <span style="color:#fff;font-size:20px">💬</span>
+      </div>
+      <!-- Mini chat popup -->
+      <div style="position:absolute;bottom:65px;right:12px;width:160px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);padding:10px;font-size:10px">
+        <div style="background:#003B8E;color:#fff;border-radius:8px;padding:6px 8px;margin-bottom:6px">Hi! How can I help you today?</div>
+        <div style="background:#f0f4ff;border-radius:8px;padding:6px 8px;text-align:right">Tell me about archiving</div>
+        <div style="background:#003B8E;color:#fff;border-radius:8px;padding:6px 8px;margin-top:6px">We store physical documents securely...</div>
+      </div>
+      <div style="position:absolute;top:10px;left:10px;right:60px;height:10px;background:#e2e8f0;border-radius:4px"></div>
+      <div style="position:absolute;top:28px;left:10px;right:80px;height:8px;background:#e2e8f0;border-radius:4px"></div>
+    </div>
+    <div class="card-body">
+      <h3>A — Floating Bubble</h3>
+      <p>Chat icon sits in the bottom-right corner of every page. Click to open a popup panel. Most familiar pattern — users know exactly what it is.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f0f4ff;padding:16px;min-height:180px;position:relative;border-radius:8px;overflow:hidden">
+      <!-- Slide-in sidebar -->
+      <div style="position:absolute;top:0;right:0;bottom:0;width:130px;background:#fff;box-shadow:-4px 0 20px rgba(0,0,0,0.1);display:flex;flex-direction:column;padding:10px">
+        <div style="font-size:9px;font-weight:700;color:#003B8E;margin-bottom:8px;border-bottom:1px solid #e2e8f0;padding-bottom:6px">DOK Assistant</div>
+        <div style="background:#003B8E;color:#fff;border-radius:6px;padding:5px 7px;font-size:8px;margin-bottom:5px">Welcome! Ask me anything about our services.</div>
+        <div style="background:#f0f4ff;border-radius:6px;padding:5px 7px;font-size:8px;margin-bottom:5px;text-align:right">What is auraDOCS?</div>
+        <div style="background:#003B8E;color:#fff;border-radius:6px;padding:5px 7px;font-size:8px">auraDOCS is our cloud DMS platform...</div>
+        <div style="margin-top:auto;display:flex;gap:4px">
+          <div style="flex:1;height:18px;background:#f0f4ff;border-radius:4px;border:1px solid #e2e8f0"></div>
+          <div style="width:18px;height:18px;background:#003B8E;border-radius:4px"></div>
+        </div>
+      </div>
+      <div style="position:absolute;top:10px;left:10px;right:140px;height:10px;background:#e2e8f0;border-radius:4px"></div>
+      <div style="position:absolute;top:28px;left:10px;right:160px;height:8px;background:#e2e8f0;border-radius:4px"></div>
+    </div>
+    <div class="card-body">
+      <h3>B — Side Panel</h3>
+      <p>A slide-in panel from the right edge. More space for conversation. Feels more like a dedicated assistant — less like a popup widget.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f0f4ff;padding:16px;min-height:180px;position:relative;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;gap:8px">
+      <!-- Inline on contact page -->
+      <div style="background:#e2e8f0;height:10px;border-radius:4px;width:60%"></div>
+      <div style="background:#e2e8f0;height:8px;border-radius:4px;width:40%"></div>
+      <div style="background:#fff;border-radius:10px;border:1px solid #d0d9f0;padding:10px;margin-top:4px">
+        <div style="font-size:9px;font-weight:700;color:#003B8E;margin-bottom:6px">🤖 Ask DOK Assistant</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+          <span style="background:#f0f4ff;border:1px solid #c7d8f5;border-radius:20px;padding:3px 8px;font-size:8px;color:#003B8E">Physical Archiving</span>
+          <span style="background:#f0f4ff;border:1px solid #c7d8f5;border-radius:20px;padding:3px 8px;font-size:8px;color:#003B8E">auraDOCS</span>
+          <span style="background:#f0f4ff;border:1px solid #c7d8f5;border-radius:20px;padding:3px 8px;font-size:8px;color:#003B8E">BPO</span>
+        </div>
+        <div style="font-size:8px;color:#64748b">Click a topic or type your question...</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Inline on Contact Page</h3>
+      <p>Embedded directly on the Contact page. Users see quick-topic buttons before they type. Simpler — no floating widget, no overlay.</p>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+<h2>How should the admin dashboard work?</h2>
+<p class="subtitle">Three approaches to content management — pick the one that fits best</p>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Built-in Admin Panel <span style="background:#22c55e;color:#fff;font-size:10px;padding:2px 8px;border-radius:99px;margin-left:6px;font-weight:700;">Recommended</span></h3>
+      <p>A password-protected <code>/admin</code> page built directly into your website. You log in, edit team members, images, services and blogs through a clean form UI. Data stored in a free Supabase database. No external tools needed — everything lives in your site.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>No external accounts or tools</li><li>100% custom to DOK's content</li><li>Works offline for preview</li><li>Free to run</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Takes 2–3 days to build</li><li>We build the UI from scratch</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Sanity CMS Studio</h3>
+      <p>Connect a professional headless CMS called Sanity. You manage all content in Sanity's own beautiful dashboard at <code>sanity.io/manage</code> — images, team, services, blogs. Changes publish to the website instantly without redeploying.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Professional CMS built for this</li><li>Real-time publish, no deploy</li><li>Image optimization built in</li><li>Free tier available</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>External tool to learn</li><li>Requires significant refactoring</li><li>Paid plan if traffic grows</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Notion as CMS</h3>
+      <p>Use Notion databases as your content source. Add a team member row in Notion → it appears on the website. Add a blog post page in Notion → published automatically. Uses the free Notion API.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Familiar Notion interface</li><li>Free to use</li><li>Quick to set up</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Notion API can be slow</li><li>Limited image handling</li><li>Content tied to Notion account</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>

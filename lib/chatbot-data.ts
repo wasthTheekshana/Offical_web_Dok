@@ -31,14 +31,14 @@ export const qaEntries: QAEntry[] = [
     link: { label: 'Learn more →', href: '/services/document-digitizing' },
   },
   {
-    id: 'bpo',
+    id: 'data-entry',
     category: 'Services',
-    buttonLabel: '⚙️ BPO',
-    keywords: ['bpo', 'outsourc', 'process', 'business', 'data entry', 'data captur', 'back office'],
-    question: 'What is Business Process Outsourcing at DOK?',
+    buttonLabel: '🗂️ Data Entry',
+    keywords: ['data entry', 'data captur', 'keyin', 'typing', 'input', 'form', 'accurac', 'outsourc'],
+    question: 'What are Data Entry Services?',
     answer:
-      'DOK\'s BPO services cover data capture, indexing, data entry, and back-office processing. We handle high-volume document-centric workflows so your team can focus on core operations.',
-    link: { label: 'Learn more →', href: '/services/bpo' },
+      'DOK provides reliable and efficient data entry services — high accuracy, fast turnaround, and strict confidentiality. Backed by trained personnel and quality control procedures, we free your team from administrative burden so they can focus on core business functions.',
+    link: { label: 'Learn more →', href: '/services/data-entry' },
   },
   {
     id: 'insurance',

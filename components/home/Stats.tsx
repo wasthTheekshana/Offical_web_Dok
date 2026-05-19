@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
 const stats = [
-  { value: '96+',  label: 'Professionals' },
-  { value: '14',   label: 'Years in Business' },
+  { value: '200+', label: 'Professionals' },
+  { value: '15+',  label: 'Years in Business' },
   { value: '3',    label: 'Active Warehouses' },
-  { value: '968+', label: 'Clients Served' },
+  { value: '200+', label: 'Elite Clients' },
 ];
 
 export default function Stats() {
@@ -48,7 +48,7 @@ export default function Stats() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-1 rounded-4xl overflow-hidden h-[50vh] relative bg-brand-navy"
           >
-            <img src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=600&h=700&fit=crop" className="w-full h-full object-cover opacity-70" />
+            <img src="/images/warehouse-forklift.jpg" className="w-full h-full object-cover opacity-80" />
             <div className="absolute bottom-6 left-6">
               <div className="flex gap-2 mb-4">
                 <span className="text-[10px] font-bold tracking-widest uppercase bg-white/20 backdrop-blur text-white px-3 py-1.5 rounded-full">ISO 27001</span>
@@ -65,7 +65,7 @@ export default function Stats() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="rounded-4xl overflow-hidden relative bg-brand-beige group"
           >
-            <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=500&h=600&fit=crop" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+            <img src="/images/scanning.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
               <h3 className="font-serif text-2xl text-white mb-2">Document Digitizing</h3>
@@ -84,7 +84,7 @@ export default function Stats() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="rounded-4xl overflow-hidden h-[50vh] relative group"
           >
-            <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=500&h=600&fit=crop" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+            <img src="/images/building.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute top-4 left-4">
               <div className="text-xs font-semibold tracking-wider uppercase text-white/60">Business Center</div>
@@ -110,7 +110,7 @@ const serviceRows = [
     status: 'Active',
     area: '3 Warehouses',
     href: '/services/physical-archiving',
-    img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&h=500&fit=crop&auto=format&q=80',
+    img: '/images/warehouse-main.jpg',
     desc: 'Three climate-controlled, access-controlled warehouse facilities in Colombo with bar-coded storage and same-day retrieval — handling millions of documents for Sri Lanka\'s top banks and insurers.',
   },
   {
@@ -123,13 +123,13 @@ const serviceRows = [
     desc: 'Our proprietary cloud-native Document Management System — intelligent OCR, automated workflows, predictive search, and enterprise-grade security. Deployed across 60+ organisations.',
   },
   {
-    name: 'BPO Operations Center',
+    name: 'Data Entry Services',
     cat: 'Managed Service',
     status: 'Active',
     area: 'Colombo 05',
-    href: '/services/bpo',
-    img: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&h=500&fit=crop&auto=format&q=80',
-    desc: 'Dedicated on-site and off-site BPO teams handling back-office operations — data entry, form processing, mailroom management and custom workflows — with rigorous quality controls.',
+    href: '/services/data-entry',
+    img: '/images/data-entry.jpg',
+    desc: 'Dedicated data entry teams delivering high-accuracy data capture, form processing, and document data extraction — backed by multi-level QC procedures and ISO 27001-certified security.',
   },
 ];
 

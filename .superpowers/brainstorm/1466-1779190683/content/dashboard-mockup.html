@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard Mockup</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+  body { background: #f1f5f9; min-height: 100vh; }
+
+  .shell { display: flex; height: 100vh; overflow: hidden; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px; flex-shrink: 0;
+    background: #003B8E;
+    display: flex; flex-direction: column;
+    padding: 0;
+  }
+  .sidebar-logo {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .sidebar-logo .dok { font-size: 28px; font-weight: 800; color: #fff; font-family: Georgia, serif; }
+  .sidebar-logo .sub { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: #F5A623; margin-top: 2px; }
+  .sidebar-badge {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5);
+    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px; margin-top: 6px; display: inline-block;
+  }
+  .nav { flex: 1; padding: 12px 0; overflow-y: auto; }
+  .nav-section { padding: 12px 16px 4px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px; cursor: pointer; transition: all 0.15s;
+    color: rgba(255,255,255,0.6); font-size: 13px; font-weight: 500;
+    border-left: 2px solid transparent;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .nav-item.active { background: rgba(255,255,255,0.12); color: #fff; border-left-color: #F5A623; }
+  .nav-item .icon { font-size: 15px; width: 18px; text-align: center; }
+  .sidebar-footer {
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 11px; color: rgba(255,255,255,0.35);
+  }
+  .sidebar-footer strong { color: rgba(255,255,255,0.7); display: block; margin-bottom: 2px; }
+
+  /* Main */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  .topbar {
+    background: #fff; border-bottom: 1px solid #e2e8f0;
+    padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar h1 { font-size: 16px; font-weight: 700; color: #1e293b; }
+  .topbar .actions { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    cursor: pointer; border: none;
+  }
+  .btn-primary { background: #003B8E; color: #fff; }
+  .btn-gold { background: #F5A623; color: #003B8E; }
+  .btn-outline { background: #fff; color: #64748b; border: 1px solid #e2e8f0; }
+
+  .content { flex: 1; overflow-y: auto; padding: 24px; }
+
+  /* Stats row */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+  .stat-card {
+    background: #fff; border-radius: 12px; padding: 16px 20px;
+    border: 1px solid #e2e8f0;
+  }
+  .stat-card .num { font-size: 26px; font-weight: 800; color: #003B8E; font-family: Georgia, serif; }
+  .stat-card .lbl { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+  /* Content grid */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .panel {
+    background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden;
+  }
+  .panel-head {
+    padding: 14px 18px; border-bottom: 1px solid #f1f5f9;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .panel-head h3 { font-size: 13px; font-weight: 700; color: #1e293b; }
+  .panel-head .add-btn {
+    font-size: 11px; font-weight: 600; color: #003B8E;
+    background: #eff6ff; padding: 4px 10px; border-radius: 6px; cursor: pointer;
+  }
+  .panel-body { padding: 0; }
+
+  /* Team row */
+  .team-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 18px; border-bottom: 1px solid #f8fafc;
+  }
+  .team-row:last-child { border-bottom: none; }
+  .avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: #e2e8f0;
+    overflow: hidden; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #003B8E; background: #dbeafe;
+  }
+  .team-info { flex: 1; min-width: 0; }
+  .team-info .name { font-size: 13px; font-weight: 600; color: #1e293b; }
+  .team-info .role { font-size: 11px; color: #94a3b8; }
+  .row-actions { display: flex; gap: 6px; }
+  .icon-btn {
+    width: 28px; height: 28px; border-radius: 6px; border: 1px solid #e2e8f0;
+    background: #fff; cursor: pointer; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; color: #64748b;
+  }
+  .icon-btn:hover { background: #f8fafc; }
+  .icon-btn.danger:hover { background: #fef2f2; color: #ef4444; border-color: #fecaca; }
+
+  /* Blog row */
+  .blog-row {
+    padding: 11px 18px; border-bottom: 1px solid #f8fafc;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .blog-row:last-child { border-bottom: none; }
+  .blog-info { flex: 1; }
+  .blog-info .title { font-size: 13px; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .blog-info .meta { font-size: 11px; color: #94a3b8; margin-top: 1px; }
+  .status-pill {
+    font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 99px;
+    flex-shrink: 0;
+  }
+  .status-pill.published { background: #dcfce7; color: #166534; }
+  .status-pill.draft { background: #fef9c3; color: #854d0e; }
+
+  /* Services */
+  .service-row {
+    padding: 10px 18px; border-bottom: 1px solid #f8fafc;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .service-row:last-child { border-bottom: none; }
+  .service-img {
+    width: 44px; height: 36px; border-radius: 6px; background: #e2e8f0;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .service-img img { width: 100%; height: 100%; object-fit: cover; }
+  .service-info { flex: 1; }
+  .service-info .name { font-size: 13px; font-weight: 600; color: #1e293b; }
+  .service-info .slug { font-size: 10px; color: #94a3b8; font-family: monospace; }
+
+  .full-panel { grid-column: 1 / -1; }
+
+  /* Clients marquee panel */
+  .client-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 18px; }
+  .chip {
+    background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 99px;
+    padding: 5px 12px; font-size: 12px; font-weight: 500; color: #475569;
+    display: flex; align-items: center; gap: 6px; cursor: pointer;
+  }
+  .chip .remove { color: #cbd5e1; font-size: 10px; }
+  .chip:hover .remove { color: #ef4444; }
+  .chip.add-chip { border-style: dashed; color: #003B8E; background: #eff6ff; }
+
+  .label-tag {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 2px 7px; border-radius: 4px; margin-left: 8px;
+  }
+  .label-tag.new { background: #dcfce7; color: #166534; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="dok">DOK</div>
+      <div class="sub">Solutions Lanka</div>
+      <div class="sidebar-badge">Admin Panel</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Content</div>
+      <div class="nav-item active"><span class="icon">📊</span> Dashboard</div>
+      <div class="nav-item"><span class="icon">👥</span> Team Members</div>
+      <div class="nav-item"><span class="icon">⚙️</span> Services</div>
+      <div class="nav-item"><span class="icon">📝</span> Blog & News</div>
+      <div class="nav-section">Site</div>
+      <div class="nav-item"><span class="icon">🖼️</span> Images</div>
+      <div class="nav-item"><span class="icon">🏢</span> Clients</div>
+      <div class="nav-item"><span class="icon">📞</span> Contact Info</div>
+      <div class="nav-section">System</div>
+      <div class="nav-item"><span class="icon">🔗</span> View Live Site</div>
+      <div class="nav-item"><span class="icon">🚪</span> Sign Out</div>
+    </nav>
+    <div class="sidebar-footer">
+      <strong>admin@doksolutions.net</strong>
+      Logged in · Supabase Auth
+    </div>
+  </div>
+
+  <!-- Main area -->
+  <div class="main">
+    <div class="topbar">
+      <h1>Dashboard Overview</h1>
+      <div class="actions">
+        <button class="btn btn-outline">🔗 View Live Site</button>
+        <button class="btn btn-gold">+ New Blog Post</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card"><div class="num">3</div><div class="lbl">Team Members</div></div>
+        <div class="stat-card"><div class="num">5</div><div class="lbl">Services</div></div>
+        <div class="stat-card"><div class="num">0</div><div class="lbl">Blog Posts</div></div>
+        <div class="stat-card"><div class="num">24</div><div class="lbl">Client Names</div></div>
+      </div>
+
+      <!-- Row 1: Team + Blog -->
+      <div class="grid-2">
+        <!-- Team -->
+        <div class="panel">
+          <div class="panel-head">
+            <h3>👥 Team Members</h3>
+            <div class="add-btn">+ Add Member</div>
+          </div>
+          <div class="panel-body">
+            <div class="team-row">
+              <div class="avatar">PP</div>
+              <div class="team-info">
+                <div class="name">Phiroze Pestonjee</div>
+                <div class="role">Managing Director</div>
+              </div>
+              <div class="row-actions">
+                <div class="icon-btn">✏️</div>
+                <div class="icon-btn danger">🗑</div>
+              </div>
+            </div>
+            <div class="team-row">
+              <div class="avatar">RP</div>
+              <div class="team-info">
+                <div class="name">Rusi Pestonjee</div>
+                <div class="role">Director</div>
+              </div>
+              <div class="row-actions">
+                <div class="icon-btn">✏️</div>
+                <div class="icon-btn danger">🗑</div>
+              </div>
+            </div>
+            <div class="team-row">
+              <div class="avatar">PW</div>
+              <div class="team-info">
+                <div class="name">Prabodhanie W.</div>
+                <div class="role">Chief Operating Officer</div>
+              </div>
+              <div class="row-actions">
+                <div class="icon-btn">✏️</div>
+                <div class="icon-btn danger">🗑</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog -->
+        <div class="panel">
+          <div class="panel-head">
+            <h3>📝 Blog & News <span class="label-tag new">New</span></h3>
+            <div class="add-btn">+ New Post</div>
+          </div>
+          <div class="panel-body">
+            <div class="blog-row">
+              <div class="blog-info">
+                <div class="title">DOK Wins GPTW 2024 Award</div>
+                <div class="meta">Draft · 19 May 2026</div>
+              </div>
+              <div class="status-pill draft">Draft</div>
+              <div class="row-actions">
+                <div class="icon-btn">✏️</div>
+                <div class="icon-btn danger">🗑</div>
+              </div>
+            </div>
+            <div class="blog-row" style="opacity:0.4">
+              <div class="blog-info">
+                <div class="title">No posts yet — create your first</div>
+                <div class="meta">Click "+ New Post" above</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Services + Clients -->
+      <div class="grid-2">
+        <!-- Services -->
+        <div class="panel">
+          <div class="panel-head">
+            <h3>⚙️ Services</h3>
+            <div class="add-btn">+ Add Service</div>
+          </div>
+          <div class="panel-body">
+            <div class="service-row">
+              <div class="service-img"><img src="/images/warehouse-main.jpg" /></div>
+              <div class="service-info"><div class="name">Physical Archiving</div><div class="slug">/services/physical-archiving</div></div>
+              <div class="row-actions"><div class="icon-btn">✏️</div></div>
+            </div>
+            <div class="service-row">
+              <div class="service-img"><img src="/images/scanning.jpg" /></div>
+              <div class="service-info"><div class="name">Document Digitizing</div><div class="slug">/services/document-digitizing</div></div>
+              <div class="row-actions"><div class="icon-btn">✏️</div></div>
+            </div>
+            <div class="service-row">
+              <div class="service-img"><img src="/images/data-entry.jpg" /></div>
+              <div class="service-info"><div class="name">Data Entry Services</div><div class="slug">/services/data-entry</div></div>
+              <div class="row-actions"><div class="icon-btn">✏️</div></div>
+            </div>
+            <div class="service-row" style="opacity:0.5">
+              <div class="service-info" style="padding-left:54px"><div class="name">+ 2 more services</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clients -->
+        <div class="panel">
+          <div class="panel-head">
+            <h3>🏢 Client Names</h3>
+          </div>
+          <div class="client-chips">
+            <div class="chip">HNB Assurance <span class="remove">✕</span></div>
+            <div class="chip">Commercial Bank <span class="remove">✕</span></div>
+            <div class="chip">Sampath Bank <span class="remove">✕</span></div>
+            <div class="chip">Peoples Bank <span class="remove">✕</span></div>
+            <div class="chip">Dialog Axiata <span class="remove">✕</span></div>
+            <div class="chip">NSB <span class="remove">✕</span></div>
+            <div class="chip">Seylan Bank <span class="remove">✕</span></div>
+            <div class="chip">John Keells <span class="remove">✕</span></div>
+            <div class="chip add-chip">+ Add client</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

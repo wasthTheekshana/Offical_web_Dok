@@ -44,10 +44,10 @@ export default function AboutStory() {
               className="space-y-5"
             >
               <p className="text-brand-navy/60 font-light text-base leading-relaxed">
-                DOK Solutions Lanka was born in 2010 as a member of the Abans Group — one of Sri Lanka's most respected conglomerates. We started with 15 professionals and a singular purpose: to revolutionise how businesses manage, secure, and leverage their document assets.
+                DOK Solutions Lanka (Pvt) Ltd was established in 2010 as a fully owned subsidiary of AB Securitas (Pvt) Ltd and a member of the Abans Group — one of Sri Lanka's most respected conglomerates. We started with a single document archiving warehouse and a vision to provide secure, reliable, and efficient records management solutions.
               </p>
               <p className="text-brand-navy/60 font-light text-base leading-relaxed">
-                Today, with 96 professionals across three purpose-built climate-controlled warehouses and our proprietary auraDOCS platform, we stand as Sri Lanka's most trusted document management and BPO partner.
+                Today, with over 200 dedicated employees across three state-of-the-art archiving warehouses, we stand as Sri Lanka's most trusted document management and BPO partner — serving more than 200 elite corporate clients across banking, insurance, healthcare, government, and beyond.
               </p>
             </motion.div>
 
@@ -61,11 +61,11 @@ export default function AboutStory() {
               className="mt-10 pt-10 border-t border-brand-navy/10 flex items-center gap-8"
             >
               {[
-                { n: '21%', l: 'Revenue CAGR' },
-                { n: '60+', l: 'Enterprise Clients' },
+                { n: '200+', l: 'Employees' },
+                { n: '200+', l: 'Elite Clients' },
                 { n: '2010', l: 'Founded' },
               ].map(item => (
-                <div key={item.n}>
+                <div key={item.l}>
                   <div className="font-serif text-3xl font-bold text-brand-navy">{item.n}</div>
                   <div className="text-[10px] uppercase tracking-widest text-brand-navy/40 mt-0.5">{item.l}</div>
                 </div>
@@ -73,26 +73,48 @@ export default function AboutStory() {
             </motion.div>
           </div>
 
-          {/* Right — image with parallax */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-[2.5rem] overflow-hidden h-[520px] lg:h-[640px] bg-brand-beige"
-          >
-            <motion.img
-              style={{ y: imgY }}
-              src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=900&h=1100&fit=crop&auto=format&q=80"
-              alt="DOK Solutions team at work"
-              className="w-full h-[120%] object-cover -mt-[10%]"
-            />
-            {/* Caption chip */}
-            <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-2xl px-5 py-3 flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
-              <span className="text-xs font-semibold text-brand-navy tracking-wide">96 Professionals — Colombo, Sri Lanka</span>
-            </div>
-          </motion.div>
+          {/* Right — stacked images */}
+          <div className="flex flex-col gap-4">
+            {/* Main team photo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative rounded-[2.5rem] overflow-hidden h-[380px] lg:h-[460px] bg-brand-beige"
+            >
+              <motion.img
+                style={{ y: imgY }}
+                src="/images/team-all.jpg"
+                alt="DOK Solutions full team"
+                className="w-full h-[120%] object-cover object-top -mt-[10%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/50 to-transparent" />
+              <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-2xl px-5 py-3 flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
+                <span className="text-xs font-semibold text-brand-navy tracking-wide">200+ Professionals — Colombo, Sri Lanka</span>
+              </div>
+            </motion.div>
+
+            {/* Building photo */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="relative rounded-[2rem] overflow-hidden h-44 bg-brand-beige"
+            >
+              <img
+                src="/images/building.jpg"
+                alt="DOK Solutions headquarters"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/50 to-transparent" />
+              <div className="absolute bottom-4 left-5">
+                <span className="text-white text-xs font-semibold tracking-wide">Our Headquarters — Kirula Road, Colombo 05</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

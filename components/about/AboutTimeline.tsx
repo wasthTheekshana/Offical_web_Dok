@@ -4,12 +4,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const milestones = [
-  { year: '2010', tag: 'Foundation',       desc: 'Founded within the Abans Group with 15 professionals. First Colombo warehouse operational.',   img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop&auto=format&q=75' },
-  { year: '2014', tag: 'ISO 9001',         desc: 'ISO 9001 Quality Management Certification achieved. Digitising services launched.',              img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&auto=format&q=75' },
-  { year: '2016', tag: 'auraDOCS Born',    desc: 'Proprietary DMS platform auraDOCS developed and deployed to first enterprise client.',            img: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&auto=format&q=75' },
-  { year: '2018', tag: 'Dual Certified',   desc: 'ISO 27001 (Information Security) and ISO 45001 (H&S) certifications. Second warehouse.',         img: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600&h=400&fit=crop&auto=format&q=75' },
-  { year: '2022', tag: 'GPTW® Certified', desc: 'First Great Place to Work® certification. Third climate-controlled warehouse opened.',             img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&auto=format&q=75' },
-  { year: '2024', tag: 'Triple GPTW®',    desc: '3rd consecutive GPTW® certification. 96-professional team. 21% revenue CAGR milestone.',          img: 'https://images.unsplash.com/photo-1543269664-7eef42226a21?w=600&h=400&fit=crop&auto=format&q=75' },
+  { year: '2010', tag: 'Foundation',       desc: 'Founded within AB Securitas with 15 professionals. First Colombo warehouse operational.',        img: '/images/warehouse-forklift.jpg' },
+  { year: '2014', tag: 'ISO 9001',         desc: 'ISO 9001 Quality Management Certification achieved. Digitising services launched.',              img: '/images/scanning.jpg' },
+  { year: '2016', tag: 'auraDOCS Born',    desc: 'Proprietary DMS platform auraDOCS developed and deployed to first enterprise client.',            img: '/images/scanning-team.png' },
+  { year: '2018', tag: 'Dual Certified',   desc: 'ISO 27001 (Information Security) and ISO 45001 (H&S) certifications. Second warehouse.',         img: '/images/warehouse-shelves.png' },
+  { year: '2022', tag: 'GPTW® Certified', desc: 'First Great Place to Work® certification. Third climate-controlled warehouse opened.',             img: '/images/warehouse-main.jpg' },
+  { year: '2024', tag: 'Triple GPTW®',    desc: '3rd consecutive GPTW® certification. 200+ professionals. 21% revenue CAGR milestone.',            img: '/images/team-all.jpg' },
 ];
 
 export default function AboutTimeline() {

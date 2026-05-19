@@ -1,0 +1,32 @@
+<h2>How should the admin login work?</h2>
+<p class="subtitle">Only you should be able to access /admin — pick how you log in</p>
+
+<div class="options">
+
+  <div class="option" data-choice="password" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Single Secret Password <span style="background:#22c55e;color:#fff;font-size:10px;padding:2px 8px;border-radius:99px;margin-left:6px;font-weight:700;">Recommended</span></h3>
+      <p>One strong password set in your environment variables. Visit <code>/admin</code>, enter the password, get a session cookie. Simple, no accounts needed, impossible to guess if the password is strong.</p>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Zero setup</span>
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Works immediately</span>
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Change password by updating env var</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="email" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Email + Password (Supabase Auth)</h3>
+      <p>Log in with your email and a password through Supabase's built-in auth system. Supports multiple admin users, password reset by email, and proper JWT sessions.</p>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Multiple admins possible</span>
+        <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;padding:3px 10px;border-radius:99px;font-size:12px">✓ Password reset via email</span>
+        <span style="background:#fef9c3;color:#854d0e;border:1px solid #fef08a;padding:3px 10px;border-radius:99px;font-size:12px">⚠ Slightly more setup</span>
+      </div>
+    </div>
+  </div>
+
+</div>

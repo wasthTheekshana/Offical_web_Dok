@@ -1,0 +1,89 @@
+<h2>Chat Flow — Step by Step</h2>
+<p class="subtitle">What the user sees at each moment</p>
+
+<div style="display:flex;flex-direction:column;gap:20px;max-width:700px;margin:0 auto">
+
+  <!-- Step 1 -->
+  <div style="display:flex;gap:16px;align-items:flex-start">
+    <div style="width:32px;height:32px;border-radius:50%;background:#003B8E;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+    <div style="flex:1">
+      <h3 style="margin:0 0 8px">Bubble appears on every page</h3>
+      <div style="background:#f8faff;border-radius:12px;padding:12px;border:1px solid #e2e8f0;display:flex;align-items:center;gap:10px">
+        <div style="width:44px;height:44px;border-radius:50%;background:#003B8E;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 16px rgba(0,59,142,0.35)">💬</div>
+        <p style="margin:0;font-size:12px;color:#64748b">Fixed bottom-right. Subtle pulse animation to draw attention. Click to open.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div style="display:flex;gap:16px;align-items:flex-start">
+    <div style="width:32px;height:32px;border-radius:50%;background:#003B8E;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+    <div style="flex:1">
+      <h3 style="margin:0 0 8px">Panel opens — welcome + quick topics</h3>
+      <div style="background:#f8faff;border-radius:12px;padding:12px;border:1px solid #e2e8f0">
+        <div style="background:#003B8E;color:#fff;border-radius:0 8px 8px 8px;padding:8px 12px;font-size:11px;max-width:80%;margin-bottom:10px">
+          Hello! I'm DOK Assistant. Ask me anything or pick a topic below.
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px;cursor:pointer">📦 Physical Archiving</span>
+          <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px">🖥 auraDOCS</span>
+          <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px">⚙️ BPO</span>
+          <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px">📄 Digitizing</span>
+          <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px">🏢 About DOK</span>
+          <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px">📞 Contact</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3a -->
+  <div style="display:flex;gap:16px;align-items:flex-start">
+    <div style="width:32px;height:32px;border-radius:50%;background:#003B8E;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">3a</div>
+    <div style="flex:1">
+      <h3 style="margin:0 0 8px">User taps a quick-topic button</h3>
+      <div style="background:#f8faff;border-radius:12px;padding:12px;border:1px solid #e2e8f0">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
+          <div style="background:#e2e8f0;border-radius:8px 0 8px 8px;padding:8px 12px;font-size:11px">📦 Physical Archiving</div>
+        </div>
+        <div style="background:#003B8E;color:#fff;border-radius:0 8px 8px 8px;padding:8px 12px;font-size:11px;max-width:80%;margin-bottom:10px">
+          DOK's physical archiving service stores your documents in our secure, climate-controlled warehouses with barcoded retrieval. <span style="opacity:0.7">Learn more →</span>
+        </div>
+        <div style="display:flex;gap:6px">
+          <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px">View Services page →</span>
+          <span style="border:1px solid #64748b;color:#64748b;border-radius:20px;padding:4px 10px;font-size:10px">🏠 Back to topics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3b -->
+  <div style="display:flex;gap:16px;align-items:flex-start">
+    <div style="width:32px;height:32px;border-radius:50%;background:#0072CE;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">3b</div>
+    <div style="flex:1">
+      <h3 style="margin:0 0 8px">User types freely — keyword match</h3>
+      <div style="background:#f8faff;border-radius:12px;padding:12px;border:1px solid #e2e8f0">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
+          <div style="background:#e2e8f0;border-radius:8px 0 8px 8px;padding:8px 12px;font-size:11px">do you have ISO certification?</div>
+        </div>
+        <div style="background:#003B8E;color:#fff;border-radius:0 8px 8px 8px;padding:8px 12px;font-size:11px;max-width:85%">
+          Yes! DOK Solutions Lanka is certified ISO 9001 (Quality), ISO 27001 (Information Security), and ISO 45001 (Occupational Health & Safety).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4 — fallback -->
+  <div style="display:flex;gap:16px;align-items:flex-start">
+    <div style="width:32px;height:32px;border-radius:50%;background:#F5A623;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">4</div>
+    <div style="flex:1">
+      <h3 style="margin:0 0 8px">No match — friendly fallback</h3>
+      <div style="background:#f8faff;border-radius:12px;padding:12px;border:1px solid #e2e8f0">
+        <div style="background:#003B8E;color:#fff;border-radius:0 8px 8px 8px;padding:8px 12px;font-size:11px;max-width:85%;margin-bottom:10px">
+          I'm not sure about that one! You can reach our team directly — they'll be happy to help.
+        </div>
+        <span style="border:1px solid #003B8E;color:#003B8E;border-radius:20px;padding:4px 10px;font-size:10px">📞 Go to Contact page →</span>
+      </div>
+    </div>
+  </div>
+
+</div>

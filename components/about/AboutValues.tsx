@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion';
 
 const values = [
-  { num: '01', title: 'Integrity',     desc: 'We act with unwavering transparency and ethical responsibility at every level of our operation.',    accent: '#003B8E' },
-  { num: '02', title: 'Team Work',     desc: 'Our 96-member DOK family operates as a single, cohesive unit — stronger together.',                  accent: '#0072CE' },
-  { num: '03', title: 'Security',      desc: 'Uncompromising physical and digital security across all client data and operational workflows.',      accent: '#003B8E' },
-  { num: '04', title: 'Client First',  desc: 'Every decision we make is driven by the single question: what is the best outcome for our client?', accent: '#F5A623' },
-  { num: '05', title: 'Innovation',    desc: 'Continuous improvement through auraDOCS, automation, and cutting-edge process engineering.',          accent: '#0072CE' },
-  { num: '06', title: 'Versatility',   desc: 'Agile and adaptive — building bespoke solutions for banking, insurance, healthcare, and government.',accent: '#003B8E' },
+  { num: '01', title: 'Integrity',                desc: 'We conduct our business with honesty, transparency, and accountability, ensuring the highest ethical standards in every interaction.',                                                         accent: '#003B8E' },
+  { num: '02', title: 'Security & Confidentiality', desc: 'We are committed to protecting the information entrusted to us through secure processes, advanced technologies, and strict confidentiality practices.',                                      accent: '#0072CE' },
+  { num: '03', title: 'Customer Commitment',      desc: 'We strive to understand and exceed customer expectations by delivering reliable, responsive, and value-driven solutions.',                                                                      accent: '#003B8E' },
+  { num: '04', title: 'Operational Excellence',   desc: 'We pursue excellence in every aspect of our operations through continuous improvement, efficiency, accuracy, and quality service delivery.',                                                    accent: '#F5A623' },
+  { num: '05', title: 'Innovation',               desc: 'We embrace technology and innovative thinking to develop smarter, future-ready information management and business process solutions.',                                                         accent: '#0072CE' },
+  { num: '06', title: 'People Empowerment',       desc: 'We value our employees as our greatest asset and foster a culture of teamwork, respect, learning, and professional growth.',                                                                   accent: '#003B8E' },
 ];
 
 const container = {
@@ -52,9 +52,9 @@ export default function AboutValues() {
             transition={{ delay: 0.2, duration: 0.7 }}
             className="text-brand-navy/55 font-light text-lg leading-relaxed self-end"
           >
-            Six principles that have guided every decision, every client relationship, 
-            and every achievement across 14+ years — forming the foundation of 
-            DOK's culture and competitive advantage.
+            Six principles that have guided every decision, every client relationship,
+            and every achievement since 2010 — forming the foundation of
+            DOK's culture and our commitment to operational excellence.
           </motion.p>
         </div>
 

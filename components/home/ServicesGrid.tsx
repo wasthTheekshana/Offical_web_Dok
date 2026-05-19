@@ -5,10 +5,10 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 import Link from 'next/link';
 
 const services = [
-  { num: '01', title: 'Physical Archiving',    href: '/services/physical-archiving',  img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop' },
-  { num: '02', title: 'Document Digitizing',   href: '/services/document-digitizing', img: 'https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=400&h=300&fit=crop' },
-  { num: '03', title: 'DMS & auraDOCS',        href: '/services/auradocs',            img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop' },
-  { num: '04', title: 'BPO Services',          href: '/services/bpo',                 img: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=300&fit=crop' },
+  { num: '01', title: 'Physical Archiving',    href: '/services/physical-archiving',  img: '/images/warehouse-main.jpg' },
+  { num: '02', title: 'Document Digitizing',   href: '/services/document-digitizing', img: '/images/scanning.jpg' },
+  { num: '03', title: 'Data Entry Services',   href: '/services/data-entry',          img: '/images/data-entry.jpg' },
+  { num: '04', title: 'DMS & auraDOCS',        href: '/services/auradocs',            img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop' },
   { num: '05', title: 'Insurance Policy Mgmt', href: '/services/insurance',           img: 'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=400&h=300&fit=crop' },
 ];
 

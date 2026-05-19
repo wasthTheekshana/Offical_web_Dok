@@ -4,10 +4,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const stats = [
-  { val: '14+', label: 'Years of Excellence' },
-  { val: '96',  label: 'Professionals' },
-  { val: '3',   label: 'ISO Certified' },
-  { val: '60+', label: 'Enterprise Clients' },
+  { val: '15+',  label: 'Years of Excellence' },
+  { val: '200+', label: 'Professionals' },
+  { val: '3',    label: 'ISO Certified' },
+  { val: '200+', label: 'Elite Clients' },
 ];
 
 export default function AboutHero() {
