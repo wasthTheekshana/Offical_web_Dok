@@ -39,11 +39,17 @@ export default function TeamCard({ member, i }: { member: TeamMember; i: number 
         className="group relative rounded-[2rem] overflow-hidden bg-brand-beige cursor-pointer"
       >
         <div className="relative h-[380px] overflow-hidden">
-          <img
-            src={member.photo_url}
-            alt={member.role}
-            className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
-          />
+          {member.photo_url ? (
+            <img
+              src={member.photo_url}
+              alt={member.role}
+              className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
+            />
+          ) : (
+            <div className="w-full h-full bg-brand-beige flex items-center justify-center font-serif text-7xl text-brand-navy/20">
+              {member.name[0]}
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-brand-navy/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
             <p className="text-white/75 text-xs leading-relaxed">{member.bio}</p>
