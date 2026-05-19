@@ -1,26 +1,52 @@
-'use client';
+import { createClient } from '@/lib/supabase/server';
 
-const clients = [
-  'HNB Assurance', 'Commercial Bank', 'Sampath Bank', 'Peoples Bank',
-  'Dialog Axiata', 'NSB', 'Seylan Bank', 'NDB Bank',
-  'John Keells', 'Aitken Spence', 'LOLC Finance', 'Plan International',
-];
-const doubled = [...clients, ...clients];
+const Separator = () => (
+  <span className="mx-6 text-brand-gold font-bold text-lg select-none">✦</span>
+);
 
-export default function ClientLogos() {
+function Row({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+  const doubled = [...items, ...items];
+  const animClass = reverse
+    ? 'animate-[marquee-reverse_40s_linear_infinite]'
+    : 'animate-[marquee_38s_linear_infinite]';
+
   return (
-    <section className="bg-brand-beige py-16 overflow-hidden">
-      <div className="mb-8 px-6 lg:px-12">
-        <span className="text-[10px] font-semibold tracking-[0.3em] uppercase text-brand-navy/40">Trusted Partners</span>
-      </div>
-      <div className="relative flex overflow-hidden">
-        <div className="flex items-center gap-12 animate-[marquee_35s_linear_infinite] flex-shrink-0">
-          {doubled.map((name, i) => (
-            <div key={i} className="flex-shrink-0 font-serif text-2xl lg:text-3xl text-brand-navy/20 hover:text-brand-navy transition-colors duration-500 cursor-crosshair whitespace-nowrap">
+    <div className="relative flex overflow-hidden">
+      <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-brand-navy to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-brand-navy to-transparent" />
+      <div className={`flex items-center flex-shrink-0 ${animClass}`}>
+        {doubled.map((name, i) => (
+          <span key={i} className="flex items-center flex-shrink-0">
+            <span className="font-serif text-2xl lg:text-3xl text-white/70 hover:text-white hover:text-brand-gold transition-colors duration-400 whitespace-nowrap cursor-default select-none tracking-tight">
               {name}
-            </div>
-          ))}
-        </div>
+            </span>
+            <Separator />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default async function ClientLogos() {
+  const supabase = await createClient();
+  const { data: clients } = await supabase.from('clients').select('name').order('display_order');
+  const names = (clients ?? []).map(c => c.name);
+  const mid = Math.ceil(names.length / 2);
+  const row1 = names.slice(0, mid);
+  const row2 = names.slice(mid);
+
+  return (
+    <section className="bg-brand-navy py-16 overflow-hidden">
+      <div className="mb-10 px-6 lg:px-12 flex items-center gap-4">
+        <div className="w-8 h-px bg-white/20" />
+        <span className="text-[10px] font-semibold tracking-[0.35em] uppercase text-white/40">
+          Trusted by Sri Lanka's Leading Organisations
+        </span>
+      </div>
+      <div className="flex flex-col gap-5">
+        <Row items={row1.length ? row1 : ['DOK Solutions Lanka']} />
+        <Row items={row2.length ? row2 : ['DOK Solutions Lanka']} reverse />
       </div>
     </section>
   );
