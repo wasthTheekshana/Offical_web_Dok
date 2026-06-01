@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { query } from '@/lib/db';
 
@@ -40,8 +39,7 @@ export default async function NewsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
 
           {/* Large first card */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="lg:row-span-2 rounded-4xl overflow-hidden relative h-[550px] lg:h-auto bg-brand-beige group">
+          <div className="lg:row-span-2 rounded-4xl overflow-hidden relative h-[550px] lg:h-auto bg-brand-beige group">
             {first.cover_url && <img src={first.cover_url} alt={first.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -54,30 +52,27 @@ export default async function NewsSection() {
                 </Link>
               )}
             </div>
-          </motion.div>
+          </div>
 
           {/* Second card */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="rounded-4xl overflow-hidden h-64 lg:h-72 bg-brand-beige group">
+          <div className="rounded-4xl overflow-hidden h-64 lg:h-72 bg-brand-beige group">
             {second.cover_url && <img src={second.cover_url} alt={second.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}
-          </motion.div>
+          </div>
           <div className="px-2 py-4">
             <span className="text-[10px] font-bold tracking-widest uppercase text-brand-navy/40">{second.category}</span>
             <h3 className="font-serif text-xl text-brand-navy mt-2 leading-tight uppercase">{second.title}</h3>
           </div>
 
           {/* Third card */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            className="lg:col-start-3 px-2 py-4">
+          <div className="lg:col-start-3 px-2 py-4">
             <span className="text-[10px] font-bold tracking-widest uppercase text-brand-navy/40">{third.category}</span>
             <h3 className="font-serif text-xl text-brand-navy/30 mt-2 leading-tight uppercase">{third.title}</h3>
-          </motion.div>
+          </div>
 
           {/* Fourth card */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-            className="rounded-4xl overflow-hidden h-48 lg:h-64 bg-brand-beige group">
+          <div className="rounded-4xl overflow-hidden h-48 lg:h-64 bg-brand-beige group">
             {fourth.cover_url && <img src={fourth.cover_url} alt={fourth.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />}
-          </motion.div>
+          </div>
           <div className="lg:col-start-4 px-2 py-4">
             <span className="text-[10px] font-bold tracking-widest uppercase text-brand-navy/40">{fourth.category}</span>
             <h3 className="font-serif text-xl text-brand-navy mt-2 leading-tight uppercase">{fourth.title}</h3>
