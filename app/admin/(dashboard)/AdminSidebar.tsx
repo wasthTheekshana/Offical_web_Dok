@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { Users, Settings, FileText, Image, Building2, Phone, LogOut, MessageSquareQuote, LayoutDashboard } from 'lucide-react';
+import { Users, Settings, FileText, Image, Building2, Phone, LogOut, MessageSquareQuote, LayoutDashboard, Newspaper } from 'lucide-react';
 
 const navItems = [
   { href: '/admin/team',         label: 'Team Members', icon: Users },
   { href: '/admin/services',     label: 'Services',     icon: Settings },
   { href: '/admin/testimonials', label: 'Testimonials', icon: MessageSquareQuote },
+  { href: '/admin/studio',       label: 'Studio Notes', icon: Newspaper },
   { href: '/admin/blog',         label: 'Blog / News',  icon: FileText },
   { href: '/admin/images',       label: 'Site Images',  icon: Image },
   { href: '/admin/content',      label: 'Page Content', icon: LayoutDashboard },
