@@ -43,14 +43,13 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
           return (
             <motion.div
               key={m.id}
-              onClick={() => { if (!isActive) { go(i); } }}
               animate={{
                 scale: isActive ? 1 : 0.92,
                 opacity: Math.abs(offset) === 2 ? 0.45 : 1,
               }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className={`relative flex-shrink-0 rounded-[1.75rem] overflow-hidden cursor-pointer select-none
-                ${isActive ? 'w-[280px]' : 'w-[240px]'}`}
+              className={`relative flex-shrink-0 rounded-[1.75rem] overflow-hidden select-none
+                ${isActive ? 'w-[280px] cursor-default' : 'w-[240px] cursor-default'}`}
               style={{ height: 420 }}
             >
               {isActive ? (
