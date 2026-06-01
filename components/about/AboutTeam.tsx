@@ -10,19 +10,19 @@ export default async function AboutTeam({ imgs }: { imgs?: Record<string, string
   ]);
 
   return (
-    <section className="bg-white py-28 lg:py-40">
+    <section className="bg-[#080C1A] py-28 lg:py-40">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-8 h-px bg-brand-navy/30" />
-          <span className="text-[10px] font-semibold tracking-[0.35em] uppercase text-brand-navy/40">The People Behind DOK</span>
+          <div className="w-8 h-px bg-white/20" />
+          <span className="text-[10px] font-semibold tracking-[0.35em] uppercase text-white/30">The People Behind DOK</span>
         </div>
 
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
-          <h2 className="font-serif text-5xl lg:text-6xl text-brand-navy leading-tight">
+          <h2 className="font-serif text-5xl lg:text-6xl text-white leading-tight">
             Our Leadership<br />
-            <span className="text-brand-navy/25">Team</span>
+            <span className="text-white/20">Team</span>
           </h2>
-          <p className="max-w-xs text-brand-navy/50 font-light text-sm leading-relaxed">
+          <p className="max-w-xs text-white/40 font-light text-sm leading-relaxed">
             Seasoned professionals who turned a bold vision into Sri Lanka's most trusted document management enterprise.
           </p>
         </div>
