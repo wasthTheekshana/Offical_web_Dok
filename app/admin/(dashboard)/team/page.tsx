@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { Pencil, Trash2, Plus, X, GripVertical } from 'lucide-react';
 import {
   DndContext,
@@ -99,18 +98,11 @@ export default function AdminTeamPage() {
   useEffect(() => { load(); }, []);
 
   async function uploadPhoto(file: File): Promise<string> {
-    const ext = file.name.split('.').pop();
-    const path = `${Date.now()}.${ext}`;
-    const res = await fetch('/api/admin/upload-url', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bucket: 'team-photos', path }),
-    });
-    const { signedUrl } = await res.json();
-    await fetch(signedUrl, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } });
-    const supabase = createClient();
-    const { data } = supabase.storage.from('team-photos').getPublicUrl(path);
-    return data.publicUrl;
+    const fd = new FormData();
+    fd.append('file', file);
+    const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+    const { url } = await res.json();
+    return url;
   }
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {

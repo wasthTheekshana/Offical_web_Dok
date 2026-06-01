@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-
 type SiteImage = { key: string; label: string; url: string; updated_at: string };
 
 export default function AdminImagesPage() {
@@ -18,21 +16,14 @@ export default function AdminImagesPage() {
 
   async function handleReplace(imageKey: string, file: File) {
     setUploading(imageKey);
-    const ext = file.name.split('.').pop();
-    const path = `${imageKey}-${Date.now()}.${ext}`;
-    const res = await fetch('/api/admin/upload-url', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bucket: 'site-images', path }),
-    });
-    const { signedUrl } = await res.json();
-    await fetch(signedUrl, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } });
-    const supabase = createClient();
-    const { data } = supabase.storage.from('site-images').getPublicUrl(path);
+    const fd = new FormData();
+    fd.append('file', file);
+    const uploadRes = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+    const { url } = await uploadRes.json();
     await fetch(`/api/admin/images/${imageKey}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: data.publicUrl }),
+      body: JSON.stringify({ url }),
     });
     setUploading(null);
     load();

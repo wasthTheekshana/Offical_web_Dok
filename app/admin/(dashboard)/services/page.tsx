@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { Pencil, Plus, X, Trash2, Upload } from 'lucide-react';
 
 type Stat = { val: string; label: string };
@@ -19,18 +18,11 @@ export default function AdminServicesPage() {
   const [newStat, setNewStat] = useState<Stat>({ val: '', label: '' });
 
   async function uploadImage(file: File): Promise<string> {
-    const ext = file.name.split('.').pop();
-    const path = `service-${Date.now()}.${ext}`;
-    const res = await fetch('/api/admin/upload-url', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bucket: 'site-images', path }),
-    });
-    const { signedUrl } = await res.json();
-    await fetch(signedUrl, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } });
-    const supabase = createClient();
-    const { data } = supabase.storage.from('site-images').getPublicUrl(path);
-    return data.publicUrl;
+    const fd = new FormData();
+    fd.append('file', file);
+    const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+    const { url } = await res.json();
+    return url;
   }
 
   async function handleImageFile(e: React.ChangeEvent<HTMLInputElement>) {

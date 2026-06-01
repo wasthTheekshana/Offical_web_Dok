@@ -1,14 +1,13 @@
 import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import AdminSidebar from './AdminSidebar';
 
 export const metadata = { title: 'Admin — DOK Solutions' };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) redirect('/admin/login');
+  const session = await getServerSession(authOptions);
+  if (!session) redirect('/admin/login');
 
   return (
     <>

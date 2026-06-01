@@ -1,30 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
-
-async function requireAuth() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  return supabase;
-}
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { query, queryOne } from '@/lib/db';
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.from('contact_details').select('*');
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  const rows = await query<{ key: string; value: string }>('SELECT key, value FROM contact_details');
   const result: Record<string, string> = {};
-  data?.forEach(row => { result[row.key] = row.value; });
+  rows.forEach(r => { result[r.key] = r.value; });
   return NextResponse.json(result);
 }
 
 export async function PUT(req: NextRequest) {
-  const supabase = await requireAuth();
-  if (!supabase) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body: Record<string, string> = await req.json();
-  const updates = Object.entries(body).map(([key, value]) =>
-    supabase.from('contact_details').upsert({ key, value }).eq('key', key)
-  );
-  await Promise.all(updates);
+  for (const [key, value] of Object.entries(body)) {
+    await queryOne(
+      `INSERT INTO contact_details (key, value) VALUES ($1,$2)
+       ON CONFLICT (key) DO UPDATE SET value=$2, updated_at=now()`,
+      [key, value]
+    );
+  }
   return NextResponse.json({ ok: true });
 }

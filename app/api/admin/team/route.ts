@@ -1,33 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
-
-async function requireAuth() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  return supabase;
-}
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { query, queryOne } from '@/lib/db';
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from('team_members')
-    .select('*')
-    .order('display_order');
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
+  const rows = await query('SELECT * FROM team_members ORDER BY display_order, created_at');
+  return NextResponse.json(rows);
 }
 
 export async function POST(req: NextRequest) {
-  const supabase = await requireAuth();
-  if (!supabase) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const body = await req.json();
-  const { data, error } = await supabase
-    .from('team_members')
-    .insert({ name: body.name, role: body.role, bio: body.bio, photo_url: body.photo_url, display_order: body.display_order ?? 0 })
-    .select()
-    .single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data, { status: 201 });
+  const { name, role, bio, photo_url, display_order } = await req.json();
+  const row = await queryOne(
+    `INSERT INTO team_members (name, role, bio, photo_url, display_order)
+     VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+    [name, role ?? '', bio ?? '', photo_url ?? '', display_order ?? 0]
+  );
+  return NextResponse.json(row, { status: 201 });
 }

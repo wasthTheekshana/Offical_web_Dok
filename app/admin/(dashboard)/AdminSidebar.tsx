@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 import { Users, Settings, FileText, Image, Building2, Phone, LogOut } from 'lucide-react';
 
 const navItems = [
@@ -16,13 +16,6 @@ const navItems = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
-  const router = useRouter();
-
-  async function signOut() {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    router.push('/admin/login');
-  }
 
   return (
     <aside className="fixed top-0 left-0 h-screen w-60 bg-[#003B8E] flex flex-col z-50">
@@ -56,7 +49,7 @@ export default function AdminSidebar() {
       {/* Sign out */}
       <div className="px-3 py-4 border-t border-white/10">
         <button
-          onClick={signOut}
+          onClick={() => signOut({ callbackUrl: '/admin/login' })}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/60 hover:bg-white/8 hover:text-white transition-all duration-200"
         >
           <LogOut size={16} />

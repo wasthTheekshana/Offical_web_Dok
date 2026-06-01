@@ -1,31 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
-
-async function requireAuth() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  return supabase;
-}
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { query, queryOne } from '@/lib/db';
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
+  const rows = await query('SELECT * FROM blog_posts ORDER BY created_at DESC');
+  return NextResponse.json(rows);
 }
 
 export async function POST(req: NextRequest) {
-  const supabase = await requireAuth();
-  if (!supabase) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body = await req.json();
   const slug = body.slug || body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const published_at = body.published ? new Date().toISOString() : null;
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .insert({ slug, title: body.title, excerpt: body.excerpt, body: body.body, cover_image_url: body.cover_image_url, published: body.published ?? false, published_at })
-    .select().single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data, { status: 201 });
+  const row = await queryOne(
+    `INSERT INTO blog_posts (slug, title, excerpt, content, cover_url, published, published_at)
+     VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
+    [slug, body.title, body.excerpt ?? '', body.content ?? '', body.cover_url ?? '', body.published ?? false, published_at]
+  );
+  return NextResponse.json(row, { status: 201 });
 }

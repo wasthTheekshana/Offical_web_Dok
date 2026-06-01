@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
+import { query } from '@/lib/db';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 
 const services = [
@@ -37,10 +37,9 @@ function NavLink({ href, label }: { href: string; label: string }) {
 }
 
 export default async function Footer() {
-  const supabase = await createClient();
-  const { data: contactRows } = await supabase.from('contact_details').select('*');
+  const contactRows = await query<{ key: string; value: string }>('SELECT key, value FROM contact_details');
   const contact: Record<string, string> = {};
-  contactRows?.forEach(r => { contact[r.key] = r.value; });
+  contactRows.forEach(r => { contact[r.key] = r.value; });
 
   return (
     <footer className="bg-white text-brand-navy">

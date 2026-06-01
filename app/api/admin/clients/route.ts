@@ -1,28 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
-
-async function requireAuth() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  return supabase;
-}
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { query, queryOne } from '@/lib/db';
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.from('clients').select('*').order('display_order');
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
+  const rows = await query('SELECT * FROM clients ORDER BY display_order');
+  return NextResponse.json(rows);
 }
 
 export async function POST(req: NextRequest) {
-  const supabase = await requireAuth();
-  if (!supabase) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const { name } = await req.json();
-  const { data: existing } = await supabase.from('clients').select('display_order').order('display_order', { ascending: false }).limit(1).single();
-  const display_order = (existing?.display_order ?? -1) + 1;
-  const { data, error } = await supabase.from('clients').insert({ name, display_order }).select().single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data, { status: 201 });
+  const { name, logo_url, website_url } = await req.json();
+  const maxRow = await queryOne<{ max: number }>('SELECT COALESCE(MAX(display_order), -1) AS max FROM clients');
+  const display_order = (maxRow?.max ?? -1) + 1;
+  const row = await queryOne(
+    `INSERT INTO clients (name, logo_url, website_url, display_order) VALUES ($1,$2,$3,$4) RETURNING *`,
+    [name, logo_url ?? '', website_url ?? '', display_order]
+  );
+  return NextResponse.json(row, { status: 201 });
 }

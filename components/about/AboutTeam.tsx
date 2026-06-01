@@ -1,11 +1,10 @@
-import { createClient } from '@/lib/supabase/server';
+import { query } from '@/lib/db';
 import { getSiteImages } from '@/lib/site-images';
-import TeamCard from './TeamCard';
+import TeamCard, { type TeamMember } from './TeamCard';
 
 export default async function AboutTeam({ imgs }: { imgs?: Record<string, string> } = {}) {
-  const supabase = await createClient();
-  const [{ data: team }, resolvedImgs] = await Promise.all([
-    supabase.from('team_members').select('*').order('display_order'),
+  const [team, resolvedImgs] = await Promise.all([
+    query<TeamMember>('SELECT * FROM team_members ORDER BY display_order, created_at'),
     imgs ? Promise.resolve(imgs) : getSiteImages(),
   ]);
 
