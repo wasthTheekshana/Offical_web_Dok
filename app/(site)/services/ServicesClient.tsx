@@ -5,61 +5,13 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import CTABanner from '@/components/home/CTABanner';
 
-const services = [
-  {
-    num: '01',
-    title: 'Physical Archiving',
-    tag: 'Secure Storage',
-    tagColor: '#003B8E',
-    desc: 'Comprehensive physical document archiving services — secure, climate-controlled warehouse facilities with CCTV surveillance, controlled access, fire detection, barcode tracking, and same-day retrieval for organisations across Sri Lanka.',
-    features: ['Climate-controlled facilities', 'Barcode tracking', 'Same-day retrieval', 'Certified destruction'],
-    img: '/images/warehouse-main.jpg',
-    href: '/services/physical-archiving',
-  },
-  {
-    num: '02',
-    title: 'Document Digitizing',
-    tag: 'Scan & Index',
-    tagColor: '#0072CE',
-    desc: 'Professional document digitization using industrial-grade high-speed scanners and advanced OCR technology. Onsite or at our secure scanning centre — transforming physical records into searchable, indexed digital formats.',
-    features: ['High-speed bulk scanning', 'Advanced OCR indexing', 'Onsite & offsite options', 'Secure digital upload'],
-    img: '/images/scanning.jpg',
-    href: '/services/document-digitizing',
-  },
-  {
-    num: '03',
-    title: 'Data Entry Services',
-    tag: 'Accurate & Scalable',
-    tagColor: '#003B8E',
-    desc: 'Reliable and efficient data entry services backed by trained personnel, quality control procedures, and technology-driven workflows. High accuracy, fast turnaround — freeing your team to focus on core business functions.',
-    features: ['High-accuracy data entry', 'QC-driven workflows', 'Scalable operations', 'Fast turnaround'],
-    img: '/images/data-entry.jpg',
-    href: '/services/data-entry',
-  },
-  {
-    num: '04',
-    title: 'DMS & auraDOCS',
-    tag: 'Proprietary Platform',
-    tagColor: '#F5A623',
-    desc: 'auraDOCS is DOK\'s proprietary cloud-based Document Management System — centralised digital storage with full-text search, role-based access controls, version management, workflow automation, and enterprise system integration.',
-    features: ['Centralised digital repository', 'Role-based access control', 'Workflow automation', 'Enterprise integration'],
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&h=800&fit=crop&auto=format&q=80',
-    href: '/services/auradocs',
-  },
-  {
-    num: '05',
-    title: 'Insurance Policy Mgmt',
-    tag: 'Industry Specific',
-    tagColor: '#0072CE',
-    desc: 'End-to-end insurance policy document management — scanning, indexing, retrieval, and secure storage for life, motor, and health insurance companies. Full lifecycle management from proposal to claims archiving.',
-    features: ['Policy lifecycle management', 'Claims document handling', 'Proposal processing', 'Digital policy archives'],
-    img: 'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=1000&h=800&fit=crop&auto=format&q=80',
-    href: '/services/insurance',
-  },
-];
+type Service = {
+  num: string; title: string; tag: string; tagColor: string;
+  desc: string; features: string[]; img: string; href: string;
+};
 
 /* ────────── Hero ────────── */
-function Hero() {
+function Hero({ count }: { count: number }) {
   return (
     <section className="bg-[#080C1A] min-h-[55vh] flex flex-col justify-end pt-36 pb-16 px-6 lg:px-16 relative overflow-hidden">
       <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-[#003B8E]/20 rounded-full blur-[120px] pointer-events-none" />
@@ -99,7 +51,7 @@ function Hero() {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="flex-shrink-0 bg-white/05 border border-white/10 rounded-2xl px-6 py-4 text-center"
           >
-            <div className="font-serif text-5xl text-[#F5A623] font-bold">5</div>
+            <div className="font-serif text-5xl text-[#F5A623] font-bold">{count}</div>
             <div className="text-[9px] uppercase tracking-[0.25em] text-white/30 mt-1">Core Services</div>
           </motion.div>
         </div>
@@ -109,7 +61,7 @@ function Hero() {
 }
 
 /* ────────── Per-card ────────── */
-function ServiceCard({ svc, i }: { svc: typeof services[0]; i: number }) {
+function ServiceCard({ svc, i }: { svc: Service; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const imgY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
@@ -160,12 +112,14 @@ function ServiceCard({ svc, i }: { svc: typeof services[0]; i: number }) {
 
       {/* Image */}
       <div className={`relative h-80 lg:h-auto overflow-hidden ${isEven ? '' : 'lg:order-1'}`}>
-        <motion.img
-          style={{ y: imgY }}
-          src={svc.img}
-          alt={svc.title}
-          className="absolute inset-0 w-full h-[115%] object-cover -top-[7.5%] group-hover:scale-[1.03] transition-transform duration-700"
-        />
+        {svc.img && (
+          <motion.img
+            style={{ y: imgY }}
+            src={svc.img}
+            alt={svc.title}
+            className="absolute inset-0 w-full h-[115%] object-cover -top-[7.5%] group-hover:scale-[1.03] transition-transform duration-700"
+          />
+        )}
         <div className="absolute inset-0 bg-brand-navy/0 group-hover:bg-brand-navy/08 transition-colors duration-500" />
       </div>
     </motion.div>
@@ -173,10 +127,10 @@ function ServiceCard({ svc, i }: { svc: typeof services[0]; i: number }) {
 }
 
 /* ────────── Page ────────── */
-export default function ServicesClient() {
+export default function ServicesClient({ services }: { services: Service[] }) {
   return (
     <div className="overflow-x-hidden">
-      <Hero />
+      <Hero count={services.length} />
       <div className="h-1 bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent" />
       <section className="bg-brand-cream py-20 px-6 lg:px-16">
         <div className="max-w-[1440px] mx-auto flex flex-col gap-6">
