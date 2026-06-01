@@ -9,6 +9,7 @@ import ClientLogos   from '@/components/home/ClientLogos';
 import NewsSection   from '@/components/home/NewsSection';
 import CertsBar      from '@/components/home/CertsBar';
 import CTABanner     from '@/components/home/CTABanner';
+import WhatWeDo from '@/components/home/WhatWeDo';
 import { getSiteImages } from '@/lib/site-images';
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default async function HomePage() {
       <Hero imgs={imgs} />
       <Stats imgs={imgs} />
       <AboutSnapshot />
+      <WhatWeDo />
       <ServicesGrid />
       <WhyChooseUs />
       <Testimonials />

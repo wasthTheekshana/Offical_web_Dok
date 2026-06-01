@@ -1,0 +1,23 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { query, queryOne } from '@/lib/db';
+
+export async function GET() {
+  const rows = await query('SELECT * FROM testimonials ORDER BY display_order, created_at');
+  return NextResponse.json(rows);
+}
+
+export async function POST(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  const { name, role, quote, photo_url } = await req.json();
+  const max = await queryOne<{ max: number }>('SELECT COALESCE(MAX(display_order),-1) AS max FROM testimonials');
+  const row = await queryOne(
+    `INSERT INTO testimonials (name, role, quote, photo_url, display_order)
+     VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+    [name, role ?? '', quote ?? '', photo_url ?? '', (max?.max ?? -1) + 1]
+  );
+  return NextResponse.json(row, { status: 201 });
+}

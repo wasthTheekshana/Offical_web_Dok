@@ -72,6 +72,24 @@ CREATE TABLE IF NOT EXISTS contact_details (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Testimonials
+CREATE TABLE IF NOT EXISTS testimonials (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  quote         TEXT NOT NULL DEFAULT '',
+  name          TEXT NOT NULL,
+  role          TEXT NOT NULL DEFAULT '',
+  photo_url     TEXT NOT NULL DEFAULT '',
+  display_order INTEGER NOT NULL DEFAULT 0,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Site content (homepage text blocks)
+CREATE TABLE IF NOT EXISTS site_content (
+  key        TEXT PRIMARY KEY,
+  value      TEXT NOT NULL DEFAULT '',
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 -- ─── Seed site_images ──────────────────────────────────────────────────────────
 INSERT INTO site_images (key, label, url) VALUES
   ('hero',               'Home Page Hero Image',        ''),

@@ -3,15 +3,17 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { Users, Settings, FileText, Image, Building2, Phone, LogOut } from 'lucide-react';
+import { Users, Settings, FileText, Image, Building2, Phone, LogOut, MessageSquareQuote, LayoutDashboard } from 'lucide-react';
 
 const navItems = [
-  { href: '/admin/team',    label: 'Team Members', icon: Users },
-  { href: '/admin/services', label: 'Services',    icon: Settings },
-  { href: '/admin/blog',    label: 'Blog / News',  icon: FileText },
-  { href: '/admin/images',  label: 'Site Images',  icon: Image },
-  { href: '/admin/clients', label: 'Clients',      icon: Building2 },
-  { href: '/admin/contact', label: 'Contact',      icon: Phone },
+  { href: '/admin/team',         label: 'Team Members', icon: Users },
+  { href: '/admin/services',     label: 'Services',     icon: Settings },
+  { href: '/admin/testimonials', label: 'Testimonials', icon: MessageSquareQuote },
+  { href: '/admin/blog',         label: 'Blog / News',  icon: FileText },
+  { href: '/admin/images',       label: 'Site Images',  icon: Image },
+  { href: '/admin/content',      label: 'Page Content', icon: LayoutDashboard },
+  { href: '/admin/clients',      label: 'Clients',      icon: Building2 },
+  { href: '/admin/contact',      label: 'Contact',      icon: Phone },
 ];
 
 export default function AdminSidebar() {
