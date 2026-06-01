@@ -1,6 +1,7 @@
 import { query } from '@/lib/db';
 import { getSiteImages } from '@/lib/site-images';
-import TeamCard, { type TeamMember } from './TeamCard';
+import TeamCarousel from './TeamCarousel';
+import { type TeamMember } from './TeamCard';
 
 export default async function AboutTeam({ imgs }: { imgs?: Record<string, string> } = {}) {
   const [team, resolvedImgs] = await Promise.all([
@@ -26,9 +27,7 @@ export default async function AboutTeam({ imgs }: { imgs?: Record<string, string
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-          {(team ?? []).map((m, i) => <TeamCard key={m.id} member={m} i={i} />)}
-        </div>
+        <TeamCarousel members={team ?? []} />
 
         <div className="mt-16 grid md:grid-cols-2 gap-4">
           <div className="relative rounded-[2rem] overflow-hidden h-72">
