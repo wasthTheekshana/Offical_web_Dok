@@ -15,9 +15,9 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const slug = body.slug || body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const row = await queryOne(
-    `INSERT INTO services (slug, title, description, hero_image_url, features, stats, published)
-     VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
-    [slug, body.title, body.description ?? '', body.hero_image_url ?? '',
+    `INSERT INTO services (slug, title, description, hero_image_url, why_image_url, features, stats, published)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+    [slug, body.title, body.description ?? '', body.hero_image_url ?? '', body.why_image_url ?? '',
      JSON.stringify(body.features ?? []), JSON.stringify(body.stats ?? []), body.published ?? true]
   );
   return NextResponse.json(row, { status: 201 });

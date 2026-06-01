@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Shield } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
+import { getServiceImages } from '@/lib/service-images';
 
 export const metadata: Metadata = {
   title: 'Insurance Policy Management',
@@ -12,14 +13,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Insurance() {
+export default async function Insurance() {
+  const { heroImg, whyImg } = await getServiceImages('insurance');
   return (
     <ServicePage
       icon={Shield}
       label="Purpose-Built for Insurance"
       title="Insurance Policy Management"
       subtitle="Specialist document management for insurance companies — from proposal intake to claims archiving and regulatory compliance."
-      heroImg="https://images.unsplash.com/photo-1521791055366-0d553872952f?w=1400&h=700&fit=crop&auto=format&q=80"
+      heroImg={heroImg || 'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=1400&h=700&fit=crop&auto=format&q=80'}
       color="#0072CE"
       stats={[
         { value: '10+',    label: 'Years in Insurance' },
@@ -38,7 +40,7 @@ export default function Insurance() {
       ]}
       whyTitle="A Decade of Insurance Sector Expertise"
       whyBody="Insurance document management is fundamentally different from generic records management. It requires an understanding of policy lifecycles, claims workflows, underwriting processes, and the specific compliance expectations set by the Insurance Regulatory Commission of Sri Lanka (IRCSL). DOK Solutions has spent over ten years building this domain expertise — working with leading life, general, and health insurers to design document workflows that are not only operationally efficient but fully audit-ready. Our teams are trained in insurance terminology, policy form types, and claims documentation requirements, ensuring that every document is handled correctly the first time. When you partner with DOK, you gain a specialist — not a generalist."
-      whyImg="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&h=700&fit=crop&auto=format&q=80"
+      whyImg={whyImg || 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&h=700&fit=crop&auto=format&q=80'}
       steps={[
         { step: '01', title: 'Proposal Intake',    desc: 'Physical proposal forms received, scanned, indexed with customer and policy data, and routed digitally to underwriting teams.' },
         { step: '02', title: 'Policy Issuance',    desc: 'Policy documents prepared, checked for accuracy, printed or generated digitally, and archived in the client\'s auraDOCS instance.' },

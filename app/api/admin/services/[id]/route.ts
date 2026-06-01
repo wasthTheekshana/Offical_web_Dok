@@ -10,9 +10,9 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const { id } = await params;
   const body = await req.json();
   const row = await queryOne(
-    `UPDATE services SET title=$1, description=$2, hero_image_url=$3, features=$4, stats=$5, published=$6
-     WHERE id=$7 RETURNING *`,
-    [body.title, body.description ?? '', body.hero_image_url ?? '',
+    `UPDATE services SET title=$1, description=$2, hero_image_url=$3, why_image_url=$4, features=$5, stats=$6, published=$7
+     WHERE id=$8 RETURNING *`,
+    [body.title, body.description ?? '', body.hero_image_url ?? '', body.why_image_url ?? '',
      JSON.stringify(body.features ?? []), JSON.stringify(body.stats ?? []), body.published ?? true, id]
   );
   if (!row) return NextResponse.json({ error: 'Not found' }, { status: 404 });

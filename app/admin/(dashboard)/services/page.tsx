@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { Pencil, Plus, X, Trash2, Upload } from 'lucide-react';
 
 type Stat = { val: string; label: string };
-type Service = { id: string; slug: string; title: string; description: string; hero_image_url: string; features: string[]; stats: Stat[]; published: boolean };
-const emptyService: Omit<Service, 'id'> = { slug: '', title: '', description: '', hero_image_url: '', features: [], stats: [], published: true };
+type Service = { id: string; slug: string; title: string; description: string; hero_image_url: string; why_image_url: string; features: string[]; stats: Stat[]; published: boolean };
+const emptyService: Omit<Service, 'id'> = { slug: '', title: '', description: '', hero_image_url: '', why_image_url: '', features: [], stats: [], published: true };
 
 export default function AdminServicesPage() {
   const [services, setServices] = useState<Service[]>([]);
@@ -13,7 +13,7 @@ export default function AdminServicesPage() {
   const [editId, setEditId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState<'hero' | 'why' | null>(null);
   const [newFeature, setNewFeature] = useState('');
   const [newStat, setNewStat] = useState<Stat>({ val: '', label: '' });
 
@@ -25,13 +25,13 @@ export default function AdminServicesPage() {
     return url;
   }
 
-  async function handleImageFile(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleImageFile(field: 'hero_image_url' | 'why_image_url', e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true);
+    setUploading(field === 'hero_image_url' ? 'hero' : 'why');
     const url = await uploadImage(file);
-    setForm(f => ({ ...f, hero_image_url: url }));
-    setUploading(false);
+    setForm(f => ({ ...f, [field]: url }));
+    setUploading(null);
   }
 
   async function load() {
@@ -44,7 +44,7 @@ export default function AdminServicesPage() {
   function openAdd() { setForm(emptyService); setEditId(null); setShowForm(true); }
 
   function openEdit(s: Service) {
-    setForm({ slug: s.slug, title: s.title, description: s.description, hero_image_url: s.hero_image_url, features: s.features, stats: s.stats, published: s.published });
+    setForm({ slug: s.slug, title: s.title, description: s.description, hero_image_url: s.hero_image_url, why_image_url: s.why_image_url ?? '', features: s.features, stats: s.stats, published: s.published });
     setEditId(s.id);
     setShowForm(true);
   }
@@ -145,19 +145,36 @@ export default function AdminServicesPage() {
                   className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#003B8E]/20 focus:border-[#003B8E] resize-none" />
               </div>
 
+              {/* Hero Image */}
               <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Hero Image</label>
+                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Hero Image <span className="text-gray-400 font-normal normal-case">(top banner)</span></label>
                 {form.hero_image_url && (
-                  <img src={form.hero_image_url} alt="" className="w-full h-36 object-cover rounded-xl mb-2" />
+                  <img src={form.hero_image_url} alt="" className="w-full h-32 object-cover rounded-xl mb-2" />
                 )}
-                <label className={`flex items-center gap-2 w-fit border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-500 hover:text-[#003B8E] hover:border-[#003B8E]/30 transition-colors mb-2 ${uploading ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
+                <label className={`flex items-center gap-2 w-fit border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-500 hover:text-[#003B8E] hover:border-[#003B8E]/30 transition-colors mb-2 ${uploading === 'hero' ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
                   <Upload size={14} />
-                  {uploading ? 'Uploading…' : 'Upload image'}
-                  <input type="file" accept="image/*" className="hidden" onChange={handleImageFile} disabled={uploading} />
+                  {uploading === 'hero' ? 'Uploading…' : 'Upload image'}
+                  <input type="file" accept="image/*" className="hidden" onChange={e => handleImageFile('hero_image_url', e)} disabled={uploading !== null} />
                 </label>
                 <input value={form.hero_image_url} onChange={e => setForm(f => ({ ...f, hero_image_url: e.target.value }))}
                   className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#003B8E]/20 focus:border-[#003B8E]"
-                  placeholder="or paste a URL: /images/warehouse-main.jpg or https://…" />
+                  placeholder="or paste a URL…" />
+              </div>
+
+              {/* Why Image */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Why-Us Image <span className="text-gray-400 font-normal normal-case">(inside page section)</span></label>
+                {form.why_image_url && (
+                  <img src={form.why_image_url} alt="" className="w-full h-32 object-cover rounded-xl mb-2" />
+                )}
+                <label className={`flex items-center gap-2 w-fit border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-500 hover:text-[#003B8E] hover:border-[#003B8E]/30 transition-colors mb-2 ${uploading === 'why' ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}>
+                  <Upload size={14} />
+                  {uploading === 'why' ? 'Uploading…' : 'Upload image'}
+                  <input type="file" accept="image/*" className="hidden" onChange={e => handleImageFile('why_image_url', e)} disabled={uploading !== null} />
+                </label>
+                <input value={form.why_image_url} onChange={e => setForm(f => ({ ...f, why_image_url: e.target.value }))}
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#003B8E]/20 focus:border-[#003B8E]"
+                  placeholder="or paste a URL…" />
               </div>
 
               {/* Features */}
@@ -212,7 +229,7 @@ export default function AdminServicesPage() {
 
             <div className="flex gap-3 mt-6">
               <button onClick={() => setShowForm(false)} className="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-xl text-sm">Cancel</button>
-              <button onClick={handleSave} disabled={saving || uploading}
+              <button onClick={handleSave} disabled={saving || uploading !== null}
                 className="flex-1 bg-[#003B8E] text-white py-2.5 rounded-xl text-sm font-semibold disabled:opacity-60 hover:bg-[#002d6e] transition-colors">
                 {saving ? 'Saving…' : 'Save'}
               </button>

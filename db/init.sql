@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS services (
   title         TEXT NOT NULL,
   description   TEXT NOT NULL DEFAULT '',
   hero_image_url TEXT NOT NULL DEFAULT '',
+  why_image_url  TEXT NOT NULL DEFAULT '',
   features      JSONB NOT NULL DEFAULT '[]',
   stats         JSONB NOT NULL DEFAULT '[]',
   published     BOOLEAN NOT NULL DEFAULT true,

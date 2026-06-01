@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ScanLine } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
+import { getServiceImages } from '@/lib/service-images';
 
 export const metadata: Metadata = {
   title: 'Document Digitizing & Indexing',
@@ -12,14 +13,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DocumentDigitizing() {
+export default async function DocumentDigitizing() {
+  const { heroImg, whyImg } = await getServiceImages('document-digitizing');
   return (
     <ServicePage
       icon={ScanLine}
       label="Scan. Recognise. Access."
       title="Document Digitizing"
       subtitle="Transform your paper archives into searchable digital assets with our industrial-grade scanning and advanced OCR services."
-      heroImg="/images/scanning.jpg"
+      heroImg={heroImg || '/images/scanning.jpg'}
       color="#0072CE"
       stats={[
         { value: '300+',  label: 'DPI Resolution' },
@@ -38,7 +40,7 @@ export default function DocumentDigitizing() {
       ]}
       whyTitle="Sri Lanka's Leading Document Digitization Partner"
       whyBody="DOK's digitization service combines the right technology with the right people. Our scanning centre is equipped with the latest Kodak and Canon industrial scanners capable of processing thousands of pages per hour, while our QC team ensures every image meets the high standards required for regulatory and archival use. We have digitized millions of documents for some of Sri Lanka's largest banks, insurance companies, and government institutions — and our experience means we can handle the most complex, fragile, or high-volume collections with efficiency and care. From a single filing cabinet to an entire warehouse, DOK delivers."
-      whyImg="/images/scanning-2.jpg"
+      whyImg={whyImg || '/images/scanning-2.jpg'}
       steps={[
         { step: '01', title: 'Preparation', desc: 'Documents are received, sorted, and prepared for scanning. Staples, clips, and bindings are removed; fragile documents are assessed and treated.' },
         { step: '02', title: 'Scanning',    desc: 'High-speed industrial scanners capture every page at 300–600 DPI resolution, optimised for the document type and its intended future use.' },

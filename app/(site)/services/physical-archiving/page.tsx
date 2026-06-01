@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Archive } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
+import { getServiceImages } from '@/lib/service-images';
 
 export const metadata: Metadata = {
   title: 'Physical Document Archiving',
@@ -12,14 +13,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PhysicalArchiving() {
+export default async function PhysicalArchiving() {
+  const { heroImg, whyImg } = await getServiceImages('physical-archiving');
   return (
     <ServicePage
       icon={Archive}
       label="Secure Offsite Storage"
       title="Physical Document Archiving"
       subtitle="Sri Lanka's most trusted physical document storage — with climate-controlled warehouses, biometric access, and same-day retrieval."
-      heroImg="/images/warehouse-main.jpg"
+      heroImg={heroImg || '/images/warehouse-main.jpg'}
       color="#003B8E"
       stats={[
         { value: '3',      label: 'Secure Warehouses' },
@@ -38,7 +40,7 @@ export default function PhysicalArchiving() {
       ]}
       whyTitle="The Trusted Choice for Physical Records Management in Sri Lanka"
       whyBody="With over 15 years serving Sri Lanka's most demanding institutions — banks, insurers, government agencies, and healthcare providers — DOK Solutions has built an unparalleled reputation for reliability, security, and operational excellence. Our physical archiving infrastructure is unmatched: three dedicated warehouse facilities with state-of-the-art environmental controls, biometric access management, and ISO 9001, ISO 27001, and ISO 45001 certifications backing every operation. When your organisation entrusts us with its most critical records, you can be certain they are in the safest hands in the country."
-      whyImg="/images/warehouse-shelves.png"
+      whyImg={whyImg || '/images/warehouse-shelves.png'}
       steps={[
         { step: '01', title: 'Collection',  desc: 'We collect your documents from your premises, professionally box them, and label each box with unique barcodes linked to your metadata specifications.' },
         { step: '02', title: 'Indexing',    desc: 'Each box and file is catalogued in our tracking system with your defined metadata — department, date range, document type, reference number, and more.' },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { DatabaseZap } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
+import { getServiceImages } from '@/lib/service-images';
 
 export const metadata: Metadata = {
   title: 'Data Entry Services',
@@ -12,14 +13,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DataEntry() {
+export default async function DataEntry() {
+  const { heroImg, whyImg } = await getServiceImages('data-entry');
   return (
     <ServicePage
       icon={DatabaseZap}
       label="Accurate. Scalable. Confidential."
       title="Data Entry Services"
       subtitle="Reliable, high-accuracy data entry and data capture services — letting your team focus on what matters most to your business."
-      heroImg="/images/data-entry.jpg"
+      heroImg={heroImg || '/images/data-entry.jpg'}
       color="#003B8E"
       stats={[
         { value: '99%+',    label: 'Accuracy Rate' },
@@ -38,7 +40,7 @@ export default function DataEntry() {
       ]}
       whyTitle="Your Trusted Partner for High-Volume Data Operations"
       whyBody="Accurate, timely data entry is the backbone of efficient business operations — yet managing it in-house is costly, resource-intensive, and a distraction from strategic work. DOK Solutions has built a dedicated data entry practice that combines expert human operators with technology-driven quality controls, enabling organisations across Sri Lanka to outsource their most data-intensive processes with confidence. Our ISO 27001-certified security framework ensures your data is always protected, while our scalable team structure means we can handle your peak periods without the overhead of permanent headcount. From one-off digitization projects to ongoing daily processing contracts, DOK delivers consistent quality and complete transparency."
-      whyImg="/images/scanning-team.png"
+      whyImg={whyImg || '/images/scanning-team.png'}
       steps={[
         { step: '01', title: 'Requirement Analysis', desc: 'We assess your document types, volumes, data fields, accuracy requirements, and output specifications to design the optimal processing workflow.' },
         { step: '02', title: 'Team Setup & Training', desc: 'Dedicated data entry operators are assigned and trained on your specific document formats, field validation rules, and quality standards.' },

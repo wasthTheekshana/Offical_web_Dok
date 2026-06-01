@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Network } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
+import { getServiceImages } from '@/lib/service-images';
 
 export const metadata: Metadata = {
   title: 'auraDOCS — Document Management System',
@@ -12,14 +13,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AuraDOCS() {
+export default async function AuraDOCS() {
+  const { heroImg, whyImg } = await getServiceImages('auradocs');
   return (
     <ServicePage
       icon={Network}
       label="Proprietary Document Intelligence"
       title="DMS & auraDOCS"
       subtitle="auraDOCS is DOK Solutions' proprietary Document Management System — intelligent, secure, and built specifically for Sri Lankan enterprises."
-      heroImg="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&h=700&fit=crop&auto=format&q=80"
+      heroImg={heroImg || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&h=700&fit=crop&auto=format&q=80'}
       color="#F5A623"
       badge="DOK's Own Platform"
       stats={[
@@ -41,7 +43,7 @@ export default function AuraDOCS() {
       ]}
       whyTitle="Purpose-Built for Sri Lankan Enterprises"
       whyBody="Unlike generic international DMS platforms, auraDOCS is designed from the ground up to meet the specific workflows, compliance requirements, and language needs of Sri Lankan organisations. It supports Sinhala, Tamil, and English document management, integrates natively with the country's leading banking and insurance systems, and is backed by DOK's in-house team of software engineers and implementation specialists. When you deploy auraDOCS, you are not just buying software — you are gaining a technology partner with 15 years of domain expertise who will configure, integrate, train, and support your team throughout the entire lifecycle of the system."
-      whyImg="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=700&fit=crop&auto=format&q=80"
+      whyImg={whyImg || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=700&fit=crop&auto=format&q=80'}
       industries={['Banking & Finance', 'Insurance', 'Healthcare', 'Government', 'Legal', 'Telecommunications', 'Corporate', 'Education']}
     />
   );
