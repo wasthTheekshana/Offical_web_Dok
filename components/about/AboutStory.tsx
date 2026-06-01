@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-export default function AboutStory() {
+export default function AboutStory({ imgs = {} }: { imgs?: Record<string, string> }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
@@ -85,7 +85,7 @@ export default function AboutStory() {
             >
               <motion.img
                 style={{ y: imgY }}
-                src="/images/team-all.jpg"
+                src={imgs['team-all'] || '/images/team-all.jpg'}
                 alt="DOK Solutions full team"
                 className="w-full h-[120%] object-cover object-top -mt-[10%]"
               />
@@ -105,7 +105,7 @@ export default function AboutStory() {
               className="relative rounded-[2rem] overflow-hidden h-44 bg-brand-beige"
             >
               <img
-                src="/images/building.jpg"
+                src={imgs['building'] || '/images/building.jpg'}
                 alt="DOK Solutions headquarters"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />

@@ -8,6 +8,7 @@ import AboutTeam           from '@/components/about/AboutTeam';
 import AboutCertifications from '@/components/about/AboutCertifications';
 import AboutAbans          from '@/components/about/AboutAbans';
 import CTABanner           from '@/components/home/CTABanner';
+import { getSiteImages } from '@/lib/site-images';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -19,17 +20,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const imgs = await getSiteImages();
   return (
     <div className="overflow-x-hidden">
       <AboutHero />
       <AboutMarquee />
-      <AboutStory />
-      <AboutTimeline />
+      <AboutStory imgs={imgs} />
+      <AboutTimeline imgs={imgs} />
       <AboutValues />
-      <AboutTeam />
+      <AboutTeam imgs={imgs} />
       <AboutCertifications />
-      <AboutAbans />
+      <AboutAbans imgs={imgs} />
       <CTABanner />
     </div>
   );

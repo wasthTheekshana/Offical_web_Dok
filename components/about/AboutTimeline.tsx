@@ -3,16 +3,15 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-const milestones = [
-  { year: '2010', tag: 'Foundation',       desc: 'Founded within AB Securitas with 15 professionals. First Colombo warehouse operational.',        img: '/images/warehouse-forklift.jpg' },
-  { year: '2014', tag: 'ISO 9001',         desc: 'ISO 9001 Quality Management Certification achieved. Digitising services launched.',              img: '/images/scanning.jpg' },
-  { year: '2016', tag: 'auraDOCS Born',    desc: 'Proprietary DMS platform auraDOCS developed and deployed to first enterprise client.',            img: '/images/scanning-team.png' },
-  { year: '2018', tag: 'Dual Certified',   desc: 'ISO 27001 (Information Security) and ISO 45001 (H&S) certifications. Second warehouse.',         img: '/images/warehouse-shelves.png' },
-  { year: '2022', tag: 'GPTW® Certified', desc: 'First Great Place to Work® certification. Third climate-controlled warehouse opened.',             img: '/images/warehouse-main.jpg' },
-  { year: '2024', tag: 'Triple GPTW®',    desc: '3rd consecutive GPTW® certification. 200+ professionals. 21% revenue CAGR milestone.',            img: '/images/team-all.jpg' },
-];
-
-export default function AboutTimeline() {
+export default function AboutTimeline({ imgs = {} }: { imgs?: Record<string, string> }) {
+  const milestones = [
+    { year: '2010', tag: 'Foundation',       desc: 'Founded within AB Securitas with 15 professionals. First Colombo warehouse operational.',        img: imgs['warehouse-forklift'] || '/images/warehouse-forklift.jpg' },
+    { year: '2014', tag: 'ISO 9001',         desc: 'ISO 9001 Quality Management Certification achieved. Digitising services launched.',              img: imgs['scanning'] || '/images/scanning.jpg' },
+    { year: '2016', tag: 'auraDOCS Born',    desc: 'Proprietary DMS platform auraDOCS developed and deployed to first enterprise client.',            img: imgs['scanning-team'] || '/images/scanning-team.png' },
+    { year: '2018', tag: 'Dual Certified',   desc: 'ISO 27001 (Information Security) and ISO 45001 (H&S) certifications. Second warehouse.',         img: imgs['warehouse-shelves'] || '/images/warehouse-shelves.png' },
+    { year: '2022', tag: 'GPTW® Certified', desc: 'First Great Place to Work® certification. Third climate-controlled warehouse opened.',             img: imgs['warehouse-main'] || '/images/warehouse-main.jpg' },
+    { year: '2024', tag: 'Triple GPTW®',    desc: '3rd consecutive GPTW® certification. 200+ professionals. 21% revenue CAGR milestone.',            img: imgs['team-all'] || '/images/team-all.jpg' },
+  ];
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (

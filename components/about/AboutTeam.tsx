@@ -1,12 +1,13 @@
 import { createClient } from '@/lib/supabase/server';
+import { getSiteImages } from '@/lib/site-images';
 import TeamCard from './TeamCard';
 
-export default async function AboutTeam() {
+export default async function AboutTeam({ imgs }: { imgs?: Record<string, string> } = {}) {
   const supabase = await createClient();
-  const { data: team } = await supabase
-    .from('team_members')
-    .select('*')
-    .order('display_order');
+  const [{ data: team }, resolvedImgs] = await Promise.all([
+    supabase.from('team_members').select('*').order('display_order'),
+    imgs ? Promise.resolve(imgs) : getSiteImages(),
+  ]);
 
   return (
     <section className="bg-white py-28 lg:py-40">
@@ -32,7 +33,7 @@ export default async function AboutTeam() {
 
         <div className="mt-16 grid md:grid-cols-2 gap-4">
           <div className="relative rounded-[2rem] overflow-hidden h-72">
-            <img src="/images/team-group.jpg" alt="DOK Solutions management team" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
+            <img src={resolvedImgs['team-group'] || '/images/team-group.jpg'} alt="DOK Solutions management team" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent" />
             <div className="absolute bottom-6 left-6">
               <span className="text-white font-serif text-lg">Management Team</span>
@@ -40,7 +41,7 @@ export default async function AboutTeam() {
             </div>
           </div>
           <div className="relative rounded-[2rem] overflow-hidden h-72">
-            <img src="/images/team-all.jpg" alt="DOK Solutions full team" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
+            <img src={resolvedImgs['team-all'] || '/images/team-all.jpg'} alt="DOK Solutions full team" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent" />
             <div className="absolute bottom-6 left-6">
               <span className="text-white font-serif text-lg">200+ Professionals</span>

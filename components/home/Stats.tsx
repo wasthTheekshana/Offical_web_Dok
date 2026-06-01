@@ -11,7 +11,7 @@ const stats = [
   { value: '200+', label: 'Elite Clients' },
 ];
 
-export default function Stats() {
+export default function Stats({ imgs = {} }: { imgs?: Record<string, string> }) {
   return (
     <section className="bg-[#1A1A2E] py-24 px-6 lg:px-12">
       <div className="max-w-[1400px] mx-auto">
@@ -48,7 +48,7 @@ export default function Stats() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-1 rounded-4xl overflow-hidden h-[50vh] relative bg-brand-navy"
           >
-            <img src="/images/warehouse-forklift.jpg" className="w-full h-full object-cover opacity-80" />
+            <img src={imgs['warehouse-forklift'] || '/images/warehouse-forklift.jpg'} className="w-full h-full object-cover opacity-80" />
             <div className="absolute bottom-6 left-6">
               <div className="flex gap-2 mb-4">
                 <span className="text-[10px] font-bold tracking-widest uppercase bg-white/20 backdrop-blur text-white px-3 py-1.5 rounded-full">ISO 27001</span>
@@ -65,7 +65,7 @@ export default function Stats() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="rounded-4xl overflow-hidden relative bg-brand-beige group"
           >
-            <img src="/images/scanning.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+            <img src={imgs['scanning'] || '/images/scanning.jpg'} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
               <h3 className="font-serif text-2xl text-white mb-2">Document Digitizing</h3>
@@ -84,7 +84,7 @@ export default function Stats() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="rounded-4xl overflow-hidden h-[50vh] relative group"
           >
-            <img src="/images/building.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+            <img src={imgs['building'] || '/images/building.jpg'} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute top-4 left-4">
               <div className="text-xs font-semibold tracking-wider uppercase text-white/60">Business Center</div>
@@ -96,44 +96,43 @@ export default function Stats() {
         </div>
 
         {/* Bottom list rows — click to expand with image */}
-        <BottomAccordion />
+        <BottomAccordion imgs={imgs} />
 
       </div>
     </section>
   );
 }
 
-const serviceRows = [
-  {
-    name: 'Physical Archive Hub',
-    cat: 'Core Service',
-    status: 'Active',
-    area: '3 Warehouses',
-    href: '/services/physical-archiving',
-    img: '/images/warehouse-main.jpg',
-    desc: 'Three climate-controlled, access-controlled warehouse facilities in Colombo with bar-coded storage and same-day retrieval — handling millions of documents for Sri Lanka\'s top banks and insurers.',
-  },
-  {
-    name: 'auraDOCS Platform',
-    cat: 'SaaS Product',
-    status: 'Live',
-    area: 'Cloud Hosted',
-    href: '/services/auradocs',
-    img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&h=500&fit=crop&auto=format&q=80',
-    desc: 'Our proprietary cloud-native Document Management System — intelligent OCR, automated workflows, predictive search, and enterprise-grade security. Deployed across 60+ organisations.',
-  },
-  {
-    name: 'Data Entry Services',
-    cat: 'Managed Service',
-    status: 'Active',
-    area: 'Colombo 05',
-    href: '/services/data-entry',
-    img: '/images/data-entry.jpg',
-    desc: 'Dedicated data entry teams delivering high-accuracy data capture, form processing, and document data extraction — backed by multi-level QC procedures and ISO 27001-certified security.',
-  },
-];
-
-function BottomAccordion() {
+function BottomAccordion({ imgs }: { imgs: Record<string, string> }) {
+  const serviceRows = [
+    {
+      name: 'Physical Archive Hub',
+      cat: 'Core Service',
+      status: 'Active',
+      area: '3 Warehouses',
+      href: '/services/physical-archiving',
+      img: imgs['warehouse-main'] || '/images/warehouse-main.jpg',
+      desc: 'Three climate-controlled, access-controlled warehouse facilities in Colombo with bar-coded storage and same-day retrieval — handling millions of documents for Sri Lanka\'s top banks and insurers.',
+    },
+    {
+      name: 'auraDOCS Platform',
+      cat: 'SaaS Product',
+      status: 'Live',
+      area: 'Cloud Hosted',
+      href: '/services/auradocs',
+      img: imgs['auradocs'] || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&h=500&fit=crop&auto=format&q=80',
+      desc: 'Our proprietary cloud-native Document Management System — intelligent OCR, automated workflows, predictive search, and enterprise-grade security. Deployed across 60+ organisations.',
+    },
+    {
+      name: 'Data Entry Services',
+      cat: 'Managed Service',
+      status: 'Active',
+      area: 'Colombo 05',
+      href: '/services/data-entry',
+      img: imgs['data-entry'] || '/images/data-entry.jpg',
+      desc: 'Dedicated data entry teams delivering high-accuracy data capture, form processing, and document data extraction — backed by multi-level QC procedures and ISO 27001-certified security.',
+    },
+  ];
   const [open, setOpen] = useState<number | null>(null);
 
   return (

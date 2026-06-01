@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-export default function AboutAbans() {
+export default function AboutAbans({ imgs = {} }: { imgs?: Record<string, string> }) {
   return (
     <section className="bg-[#080C1A] py-28 lg:py-40 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
@@ -25,7 +25,7 @@ export default function AboutAbans() {
           >
             <div className="rounded-[2.5rem] overflow-hidden h-[400px] lg:h-[520px]">
               <img
-                src="/images/building.jpg"
+                src={imgs['building'] || '/images/building.jpg'}
                 alt="DOK Solutions Headquarters"
                 className="w-full h-full object-cover"
               />

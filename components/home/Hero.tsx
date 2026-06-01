@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useRef } from 'react';
 
-export default function Hero() {
+export default function Hero({ imgs = {} }: { imgs?: Record<string, string> }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
@@ -41,7 +41,7 @@ export default function Hero() {
             className="relative rounded-4xl overflow-hidden h-[60vh] lg:h-[80vh] bg-brand-beige"
           >
             <img
-              src="/hero-warehouse.png"
+              src={imgs['hero'] || '/hero-warehouse.png'}
               alt="DOK Solutions Facility"
               className="w-full h-full object-cover"
             />

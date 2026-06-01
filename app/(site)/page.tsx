@@ -9,17 +9,19 @@ import ClientLogos   from '@/components/home/ClientLogos';
 import NewsSection   from '@/components/home/NewsSection';
 import CertsBar      from '@/components/home/CertsBar';
 import CTABanner     from '@/components/home/CTABanner';
+import { getSiteImages } from '@/lib/site-images';
 
 export const metadata: Metadata = {
   title: 'DOK Solutions Lanka — Journey Towards A Smart Era',
   description: "Sri Lanka's leading document management & BPO company. Part of the Abans Group. ISO 9001 | ISO 27001 | ISO 45001 certified.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const imgs = await getSiteImages();
   return (
     <>
-      <Hero />
-      <Stats />
+      <Hero imgs={imgs} />
+      <Stats imgs={imgs} />
       <AboutSnapshot />
       <ServicesGrid />
       <WhyChooseUs />
