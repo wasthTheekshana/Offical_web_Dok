@@ -36,7 +36,7 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
   };
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto">
+    <div className="relative w-full max-w-sm mx-auto">
       {/* Card */}
       <div className="overflow-hidden rounded-[2rem]">
         <AnimatePresence custom={direction} mode="wait">
@@ -51,7 +51,7 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
             className="group relative bg-brand-beige rounded-[2rem] overflow-hidden"
           >
             {/* Photo */}
-            <div className="relative h-[480px] overflow-hidden">
+            <div className="relative h-72 overflow-hidden">
               {m.photo_url ? (
                 <img
                   src={m.photo_url}
@@ -59,24 +59,24 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
               ) : (
-                <div className="w-full h-full bg-brand-beige flex items-center justify-center font-serif text-9xl text-brand-navy/20">
+                <div className="w-full h-full bg-brand-beige flex items-center justify-center font-serif text-7xl text-brand-navy/20">
                   {m.name[0]}
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-brand-navy/10 to-transparent" />
               {/* Bio overlay */}
               {m.bio && (
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <p className="text-white/80 text-sm leading-relaxed">{m.bio}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="text-white/80 text-xs leading-relaxed">{m.bio}</p>
                 </div>
               )}
             </div>
 
             {/* Name / role */}
-            <div className="p-8 flex items-center justify-between">
+            <div className="p-5 flex items-center justify-between">
               <div>
-                <div className="font-serif text-2xl text-brand-navy">{m.role}</div>
-                <div className="text-xs tracking-widest uppercase text-brand-navy/40 mt-1">{m.name}</div>
+                <div className="font-serif text-lg text-brand-navy">{m.role}</div>
+                <div className="text-[11px] tracking-widest uppercase text-brand-navy/40 mt-0.5">{m.name}</div>
               </div>
               <div className="text-xs font-semibold tracking-widest uppercase text-brand-navy/30">
                 {String(index + 1).padStart(2, '0')} / {String(members.length).padStart(2, '0')}
