@@ -16,9 +16,9 @@ export async function POST(req: NextRequest) {
   const slug = body.slug || body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const published_at = body.published ? new Date().toISOString() : null;
   const row = await queryOne(
-    `INSERT INTO blog_posts (slug, title, excerpt, content, cover_url, published, published_at)
-     VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
-    [slug, body.title, body.excerpt ?? '', body.content ?? '', body.cover_url ?? '', body.published ?? false, published_at]
+    `INSERT INTO blog_posts (slug, title, excerpt, content, cover_url, category, published, published_at)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+    [slug, body.title, body.excerpt ?? '', body.content ?? '', body.cover_url ?? '', body.category ?? 'Insight', body.published ?? false, published_at]
   );
   return NextResponse.json(row, { status: 201 });
 }

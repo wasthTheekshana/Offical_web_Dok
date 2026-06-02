@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { query } from '@/lib/db';
+import { cachedQuery } from '@/lib/db';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 
 const services = [
@@ -37,7 +37,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
 }
 
 export default async function Footer() {
-  const contactRows = await query<{ key: string; value: string }>('SELECT key, value FROM contact_details');
+  const contactRows = await cachedQuery<{ key: string; value: string }>('SELECT key, value FROM contact_details', [], ['contact']);
   const contact: Record<string, string> = {};
   contactRows.forEach(r => { contact[r.key] = r.value; });
 

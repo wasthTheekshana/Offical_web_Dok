@@ -24,11 +24,18 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
 
   if (!members.length) return null;
 
-  // Show: active-1, active, active+1, active+2 (4 cards max)
-  const visible = [-1, 0, 1, 2].map(offset => {
+  // Show up to 4 cards; deduplicate when team is small
+  const visibleOffsets = members.length === 1 ? [0]
+    : members.length === 2 ? [-1, 0]
+    : members.length === 3 ? [-1, 0, 1]
+    : [-1, 0, 1, 2];
+
+  const seen = new Set<number>();
+  const visible = visibleOffsets.reduce<{ member: TeamMember; offset: number }[]>((acc, offset) => {
     const idx = (active + offset + members.length) % members.length;
-    return { member: members[idx], offset };
-  });
+    if (!seen.has(idx)) { seen.add(idx); acc.push({ member: members[idx], offset }); }
+    return acc;
+  }, []);
 
   return (
     <div className="relative w-full">

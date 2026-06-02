@@ -1,7 +1,10 @@
-import { cache } from 'react';
-import { query } from './db';
+import { cachedQuery } from './db';
 
-export const getSiteImages = cache(async (): Promise<Record<string, string>> => {
-  const rows = await query<{ key: string; url: string }>('SELECT key, url FROM site_images');
+export async function getSiteImages(): Promise<Record<string, string>> {
+  const rows = await cachedQuery<{ key: string; url: string }>(
+    'SELECT key, url FROM site_images',
+    [],
+    ['site_images']
+  );
   return Object.fromEntries(rows.filter(r => r.url).map(r => [r.key, r.url]));
-});
+}
