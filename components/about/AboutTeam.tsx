@@ -1,11 +1,11 @@
-import { query } from '@/lib/db';
+import { cachedQuery } from '@/lib/db';
 import { getSiteImages } from '@/lib/site-images';
 import TeamCarousel from './TeamCarousel';
 import { type TeamMember } from './TeamCard';
 
 export default async function AboutTeam({ imgs }: { imgs?: Record<string, string> } = {}) {
   const [team, resolvedImgs] = await Promise.all([
-    query<TeamMember>('SELECT * FROM team_members ORDER BY display_order, created_at'),
+    cachedQuery<TeamMember>('SELECT * FROM team_members ORDER BY display_order, created_at', [], ['team_members']),
     imgs ? Promise.resolve(imgs) : getSiteImages(),
   ]);
 

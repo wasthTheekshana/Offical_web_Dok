@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { cachedQuery } from '@/lib/db';
 
 const Separator = () => (
   <span className="mx-6 text-brand-gold font-bold text-lg select-none">✦</span>
@@ -29,7 +29,7 @@ function Row({ items, reverse = false }: { items: string[]; reverse?: boolean })
 }
 
 export default async function ClientLogos() {
-  const clients = await query<{ name: string }>('SELECT name FROM clients ORDER BY display_order');
+  const clients = await cachedQuery<{ name: string }>('SELECT name FROM clients ORDER BY display_order', [], ['clients']);
   const names = clients.map(c => c.name);
   const mid = Math.ceil(names.length / 2);
   const row1 = names.slice(0, mid);

@@ -27,14 +27,15 @@ export async function queryOne<T = Record<string, unknown>>(
   return (res.rows[0] ?? null) as T | null;
 }
 
-// Cached versions for data that rarely changes — 60s revalidation
+// Cached query — revalidate seconds defaults to 300 (5 min)
 export const cachedQuery = <T = Record<string, unknown>>(
   text: string,
   params?: unknown[],
-  tags?: string[]
+  tags?: string[],
+  revalidate = 300
 ) =>
   unstable_cache(
     () => query<T>(text, params),
     [text, JSON.stringify(params ?? [])],
-    { revalidate: 60, tags }
+    { revalidate, tags }
   )();

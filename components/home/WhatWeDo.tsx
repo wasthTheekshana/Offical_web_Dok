@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { query } from '@/lib/db';
+import { cachedQuery } from '@/lib/db';
 
 type Service = { id: string; slug: string; title: string; description: string; hero_image_url: string; features: string[] };
 type ContentRow = { key: string; value: string };
 
 export default async function WhatWeDo() {
   const [services, contentRows] = await Promise.all([
-    query<Service>('SELECT id, slug, title, description, hero_image_url, features FROM services WHERE published = true ORDER BY display_order, title'),
-    query<ContentRow>("SELECT key, value FROM site_content WHERE key LIKE 'whatwedo%'"),
+    cachedQuery<Service>('SELECT id, slug, title, description, hero_image_url, features FROM services WHERE published = true ORDER BY display_order, title', [], ['services']),
+    cachedQuery<ContentRow>("SELECT key, value FROM site_content WHERE key LIKE 'whatwedo%'", [], ['site_content']),
   ]);
 
   const c: Record<string, string> = {};
