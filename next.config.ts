@@ -18,8 +18,9 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",   // unsafe-eval needed by Next.js dev
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co https://*.supabase.in",
-      "connect-src 'self'",
+      "img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co https://*.supabase.in https://maps.googleapis.com https://maps.gstatic.com",
+      "frame-src https://www.google.com https://maps.google.com",
+      "connect-src 'self' https://maps.googleapis.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",

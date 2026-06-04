@@ -96,14 +96,29 @@ export default function ContactClient() {
               ))}
             </div>
 
-            {/* Map placeholder */}
-            <div className="rounded-2xl overflow-hidden h-60 bg-gradient-to-br from-[#003B8E]/08 to-[#0072CE]/08 border border-[#E8EDF5] flex items-center justify-center">
-              <div className="text-center">
-                <MapPin size={40} className="text-[#003B8E]/35 mx-auto mb-2" />
-                <p className="text-sm text-[#64748B] font-semibold">141, Kirula Road, Colombo 05</p>
-                <p className="text-xs text-[#94A3B8] mt-1">Add Google Maps embed here</p>
-              </div>
+            {/* Google Map */}
+            <div className="rounded-2xl overflow-hidden h-72 border border-[#E8EDF5] shadow-sm">
+              <iframe
+                title="DOK Solutions Lanka location"
+                src="https://www.google.com/maps?q=DOK+Solutions+Lanka+(Pvt)+Ltd,+141+Kirula+Road,+Colombo+05,+Sri+Lanka&output=embed&hl=en&z=16"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
+
+            {/* Directions link */}
+            <a
+              href="https://maps.google.com/?q=DOK+Solutions+Lanka,+141+Kirula+Road,+Colombo+05"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#003B8E] hover:text-[#0072CE] transition-colors"
+            >
+              <MapPin size={13} /> Get Directions ↗
+            </a>
           </div>
 
           {/* Right — form */}
