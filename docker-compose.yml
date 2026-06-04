@@ -5,12 +5,11 @@ services:
     environment:
       POSTGRES_DB: dok_admin
       POSTGRES_USER: dok
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    ports:
-      - "5432:5432"
+    # No ports exposed — DB only reachable by app container internally
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dok -d dok_admin"]
       interval: 10s
@@ -23,9 +22,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://dok:${DB_PASSWORD:-changeme}@db:5432/dok_admin
-      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      DATABASE_URL: postgresql://dok:${DB_PASSWORD}@db:5432/dok_admin
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      RESEND_API_KEY: ${RESEND_API_KEY}
     volumes:
       - uploads:/app/public/uploads
     depends_on:

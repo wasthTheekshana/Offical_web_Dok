@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env*
+node_modules
+.next
+public/uploads/*
+npm-debug.log*
+*.tsbuildinfo
+README.md
+docs/
