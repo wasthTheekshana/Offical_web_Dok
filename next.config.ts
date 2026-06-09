@@ -15,12 +15,12 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",   // unsafe-eval needed by Next.js dev
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co https://*.supabase.in https://maps.googleapis.com https://maps.gstatic.com",
-      "frame-src https://www.google.com https://maps.google.com",
-      "connect-src 'self' https://maps.googleapis.com",
+      "img-src 'self' data: blob: https://images.unsplash.com https://maps.googleapis.com https://maps.gstatic.com https://www.facebook.com https://www.googletagmanager.com",
+      "frame-src https://www.google.com https://maps.google.com https://www.googletagmanager.com",
+      "connect-src 'self' https://maps.googleapis.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.facebook.com https://connect.facebook.net",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",
