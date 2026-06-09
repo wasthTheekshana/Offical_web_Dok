@@ -1,7 +1,11 @@
 services:
+
   db:
     image: postgres:16-alpine
+    container_name: website-db
     restart: unless-stopped
+    expose:
+      - "5432"
     environment:
       POSTGRES_DB: dok_admin
       POSTGRES_USER: dok
@@ -9,7 +13,8 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    # No ports exposed — DB only reachable by app container internally
+    networks:
+      - app-net
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dok -d dok_admin"]
       interval: 10s
@@ -18,9 +23,10 @@ services:
 
   app:
     build: .
+    container_name: website-app
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       DATABASE_URL: postgresql://dok:${DB_PASSWORD}@db:5432/dok_admin
       NEXTAUTH_URL: ${NEXTAUTH_URL}
@@ -28,9 +34,19 @@ services:
       RESEND_API_KEY: ${RESEND_API_KEY}
     volumes:
       - uploads:/app/public/uploads
+    networks:
+      - app-net
+      - shared-nginx
     depends_on:
       db:
         condition: service_healthy
+
+networks:
+  app-net:
+    name: website-app-net
+  shared-nginx:
+    name: shared-nginx
+    external: true
 
 volumes:
   pgdata:
