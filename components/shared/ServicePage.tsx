@@ -1,7 +1,9 @@
-import Link from 'next/link';
 import { CheckCircle, LucideIcon } from 'lucide-react';
 import PageHero from '@/components/shared/PageHero';
 import CTABanner from '@/components/home/CTABanner';
+import { safeJsonLd } from '@/lib/json-ld';
+
+const BASE = process.env.NEXTAUTH_URL || 'https://doksolutions.lk';
 
 interface Step    { step: string; title: string; desc: string; }
 interface Feature { title: string; desc: string; }
@@ -28,8 +30,34 @@ interface ServicePageProps {
 export default function ServicePage({
   label, title, subtitle, heroImg, color, intro, features, steps, industries, badge, stats, whyTitle, whyBody, whyImg,
 }: ServicePageProps) {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',     item: BASE },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${BASE}/services` },
+      { '@type': 'ListItem', position: 3, name: title,      item: `${BASE}/services` },
+    ],
+  };
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: title,
+    description: subtitle,
+    provider: {
+      '@type': 'Organization',
+      name: 'DOK Solutions Lanka (Pvt) Ltd',
+      url: BASE,
+    },
+    areaServed: { '@type': 'Country', name: 'Sri Lanka' },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceSchema) }} />
+
       <PageHero
         label={label}
         title={title}
@@ -158,7 +186,7 @@ export default function ServicePage({
         </section>
       )}
 
-      <CTABanner />
+      <CTABanner service={title} />
     </>
   );
 }

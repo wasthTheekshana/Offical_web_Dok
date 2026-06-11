@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import PageHero from '@/components/shared/PageHero';
 
 const services = [
@@ -15,13 +16,18 @@ const services = [
 ];
 
 export default function ContactClient() {
-  const [sent,    setSent]    = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [sending, setSending] = useState(false);
   const [form, setForm] = useState({
     name: '', email: '', phone: '', company: '', service: '', message: '',
   });
-
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const preservice = searchParams.get('service');
+    if (preservice) setForm(p => ({ ...p, service: preservice }));
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,9 +40,7 @@ export default function ContactClient() {
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error('Failed to send');
-      setSent(true);
-      setForm({ name: '', email: '', phone: '', company: '', service: '', message: '' });
-      setTimeout(() => setSent(false), 5000);
+      router.push('/thank-you');
     } catch {
       setError('Something went wrong. Please email us directly at enquiries@doksolutions.net');
     } finally {
@@ -131,20 +135,7 @@ export default function ContactClient() {
             <div className="bg-white rounded-3xl border border-[#E8EDF5] shadow-card p-8 lg:p-10">
               <h3 className="text-2xl font-black text-[#1A1A2E] mb-7">Send Us a Message</h3>
 
-              {sent ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-16 text-center"
-                >
-                  <div className="w-20 h-20 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center mb-5">
-                    <CheckCircle size={36} className="text-green-500" />
-                  </div>
-                  <h4 className="text-xl font-black text-[#1A1A2E] mb-2">Message Sent!</h4>
-                  <p className="text-[#64748B] text-sm">Our team will reach out within 24 hours.</p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-bold text-[#64748B] uppercase tracking-wider mb-1.5 block">Full Name *</label>
@@ -209,7 +200,6 @@ export default function ContactClient() {
                     )}
                   </motion.button>
                 </form>
-              )}
             </div>
           </motion.div>
         </div>

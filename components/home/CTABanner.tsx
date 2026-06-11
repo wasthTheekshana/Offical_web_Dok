@@ -2,7 +2,15 @@
 
 import Link from 'next/link';
 
-export default function CTABanner() {
+interface CTABannerProps {
+  service?: string;
+}
+
+export default function CTABanner({ service }: CTABannerProps) {
+  const contactHref = service
+    ? `/contact?service=${encodeURIComponent(service)}`
+    : '/contact';
+
   return (
     <section className="bg-brand-navy py-32 px-6 lg:px-12">
       <div className="max-w-[1400px] mx-auto grid lg:grid-cols-[1fr_auto] gap-12 items-center">
@@ -18,7 +26,7 @@ export default function CTABanner() {
             Transition your legacy document systems into a streamlined, high-efficiency digital infrastructure.
           </p>
           <Link
-            href="/contact"
+            href={contactHref}
             className="inline-flex items-center gap-3 bg-brand-gold text-brand-navy font-bold text-xs tracking-widest uppercase px-8 py-5 rounded-full hover:bg-white transition-colors duration-300"
           >
             Contact Sales ↗

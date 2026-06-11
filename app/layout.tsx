@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import Script from 'next/script';
+import { safeJsonLd } from '@/lib/json-ld';
 import './globals.css';
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -77,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(orgSchema) }}
         />
 
         {/* Google Tag Manager */}
