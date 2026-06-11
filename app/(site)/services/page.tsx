@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { query } from '@/lib/db';
 import ServicesClient from './ServicesClient';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Services',
   description: "Explore DOK Solutions Lanka's comprehensive document management and BPO services.",

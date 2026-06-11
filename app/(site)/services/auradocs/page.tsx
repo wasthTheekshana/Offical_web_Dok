@@ -3,6 +3,8 @@ import { Network } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
 import { getServiceImages } from '@/lib/service-images';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'auraDOCS — Document Management System',
   description: "auraDOCS is DOK Solutions Lanka's proprietary cloud-based Document Management System (DMS). Centralized storage, advanced search, role-based access controls, audit trails, workflow automation, and seamless enterprise integration.",

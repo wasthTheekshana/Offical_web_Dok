@@ -10,6 +10,8 @@ import AboutAbans          from '@/components/about/AboutAbans';
 import CTABanner           from '@/components/home/CTABanner';
 import { getSiteImages } from '@/lib/site-images';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'About Us',
   description: 'DOK Solutions Lanka (Pvt) Ltd is Sri Lanka\'s leading records management and BPO company. Established in 2010, part of the Abans Group, ISO 9001 | ISO 27001 | ISO 45001 certified, with 200+ employees serving 200+ elite corporate clients.',

@@ -3,6 +3,8 @@ import { Shield } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
 import { getServiceImages } from '@/lib/service-images';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Insurance Policy Management',
   description: 'DOK Solutions Lanka manages the full lifecycle of insurance policy documents — scanning, indexing, retrieval, and secure storage for life, motor, and health insurance companies across Sri Lanka.',

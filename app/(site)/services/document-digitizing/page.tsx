@@ -3,6 +3,8 @@ import { ScanLine } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
 import { getServiceImages } from '@/lib/service-images';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Document Digitizing & Indexing',
   description: 'Professional document digitization and indexing services in Sri Lanka. DOK Solutions uses industrial-grade high-speed scanners and advanced OCR to transform physical records into secure, searchable digital formats.',

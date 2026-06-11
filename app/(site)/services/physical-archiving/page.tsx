@@ -3,6 +3,8 @@ import { Archive } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
 import { getServiceImages } from '@/lib/service-images';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Physical Document Archiving',
   description: 'DOK Solutions Lanka provides comprehensive physical document archiving services — secure climate-controlled warehouses, barcode tracking, same-day retrieval, and certified document destruction for organisations across Sri Lanka.',

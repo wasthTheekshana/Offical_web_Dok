@@ -12,6 +12,8 @@ import CTABanner     from '@/components/home/CTABanner';
 import WhatWeDo from '@/components/home/WhatWeDo';
 import { getSiteImages } from '@/lib/site-images';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'DOK Solutions Lanka — Journey Towards A Smart Era',
   description: "Sri Lanka's leading document management & BPO company. Part of the Abans Group. ISO 9001 | ISO 27001 | ISO 45001 certified.",

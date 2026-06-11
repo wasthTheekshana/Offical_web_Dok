@@ -5,6 +5,8 @@ import CTABanner from '@/components/home/CTABanner';
 import { cachedQuery } from '@/lib/db';
 import { safeJsonLd } from '@/lib/json-ld';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Blog & Insights',
   description: 'Thought leadership on document management, BPO, digital transformation, and workplace excellence from DOK Solutions Lanka — Sri Lanka\'s leading records management company.',

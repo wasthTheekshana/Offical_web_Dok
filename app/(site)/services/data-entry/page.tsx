@@ -3,6 +3,8 @@ import { DatabaseZap } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
 import { getServiceImages } from '@/lib/service-images';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Data Entry Services',
   description: 'DOK Solutions Lanka provides reliable and efficient data entry services with high accuracy, fast turnaround, and strict confidentiality. Backed by trained personnel and technology-driven workflows — free your team to focus on core business functions.',

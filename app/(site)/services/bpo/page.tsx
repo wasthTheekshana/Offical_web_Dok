@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Users } from 'lucide-react';
 import ServicePage from '@/components/shared/ServicePage';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Business Process Outsourcing (BPO)',
   description: 'DOK Solutions Lanka provides reliable BPO services including data entry, data capture, form processing, and workflow management. Reduce operational costs and let your team focus on core business functions.',
