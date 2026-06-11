@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Thank You — Message Received',
   description: 'Thank you for contacting DOK Solutions Lanka. Our team will respond within 24 hours.',

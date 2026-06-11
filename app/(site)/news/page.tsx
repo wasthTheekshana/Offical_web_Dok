@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Calendar, Tag, ArrowRight } from 'lucide-react';
+
+export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import PageHero from '@/components/shared/PageHero';
 import SectionHeader from '@/components/shared/SectionHeader';
