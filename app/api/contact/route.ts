@@ -2,8 +2,6 @@ import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 import { rateLimit } from '@/lib/rate-limit';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Escape HTML special chars to prevent email HTML injection
 function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -39,6 +37,7 @@ export async function POST(req: NextRequest) {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:8px 0;font-size:13px;color:#64748B;width:130px">${label}</td><td style="padding:8px 0;font-size:14px;font-weight:600">${esc(value)}</td></tr>`;
 
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const { error } = await resend.emails.send({
     from: 'DOK Website <noreply@doksolutions.net>',
     to: 'enquiries@doksolutions.net',
