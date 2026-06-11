@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 const values = [
   { num: '01', title: 'Integrity',                desc: 'We conduct our business with honesty, transparency, and accountability, ensuring the highest ethical standards in every interaction.',                                                         accent: '#003B8E' },
@@ -11,12 +11,12 @@ const values = [
   { num: '06', title: 'People Empowerment',       desc: 'We value our employees as our greatest asset and foster a culture of teamwork, respect, learning, and professional growth.',                                                                   accent: '#003B8E' },
 ];
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08 } },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 40 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };

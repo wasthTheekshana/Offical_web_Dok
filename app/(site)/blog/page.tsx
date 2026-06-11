@@ -58,7 +58,7 @@ export default async function BlogPage() {
     dbPosts = await cachedQuery<BlogPost>(
       'SELECT id, slug, title, excerpt, cover_url, category, published_at FROM blog_posts WHERE published = true ORDER BY published_at DESC',
       [],
-      { tags: ['blog'], revalidate: 300 },
+      ['blog'],
     );
   } catch {
     // fall through to hardcoded
