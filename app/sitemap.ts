@@ -17,17 +17,23 @@ const staticRoutes: { path: string; priority: number; changeFreq: MetadataRoute.
   { path: '/contact',                     priority: 0.7, changeFreq: 'yearly' },
 ];
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await query<{ slug: string; published_at: string }>(
-    'SELECT slug, published_at FROM blog_posts WHERE published = true ORDER BY published_at DESC'
-  );
+export const dynamic = 'force-dynamic';
 
-  const blogEntries: MetadataRoute.Sitemap = posts.map(p => ({
-    url: `${BASE}/blog/${p.slug}`,
-    lastModified: new Date(p.published_at),
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }));
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  let blogEntries: MetadataRoute.Sitemap = [];
+  try {
+    const posts = await query<{ slug: string; published_at: string }>(
+      'SELECT slug, published_at FROM blog_posts WHERE published = true ORDER BY published_at DESC'
+    );
+    blogEntries = posts.map(p => ({
+      url: `${BASE}/blog/${p.slug}`,
+      lastModified: new Date(p.published_at),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }));
+  } catch {
+    // DB not available at build time — sitemap will contain only static routes
+  }
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map(r => ({
     url: `${BASE}${r.path}`,
