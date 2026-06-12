@@ -33,7 +33,7 @@ services:
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
       RESEND_API_KEY: ${RESEND_API_KEY}
     volumes:
-      - uploads:/app/public/uploads
+      - ./uploads:/app/public/uploads
     networks:
       - app-net
       - shared-nginx
@@ -56,4 +56,3 @@ networks:
 
 volumes:
   pgdata:
-  uploads:
