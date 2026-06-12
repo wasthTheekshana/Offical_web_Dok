@@ -15,12 +15,11 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs \
  && adduser  --system --uid 1001 nextjs
 
-# Standalone build bundles its own node_modules — only copy what's needed
 COPY --from=builder /app/public                             ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static    ./.next/static
 
-# Persistent uploads directory
+# Uploads directory - world writable so nginx can read new files
 RUN mkdir -p /app/public/uploads && chmod 777 /app/public/uploads
 
 USER nextjs
@@ -30,4 +29,5 @@ ENV PORT=3000 HOSTNAME="0.0.0.0"
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000/api/health', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"
 
-CMD ["node", "server.js"]
+# Set umask 022 so new files are created with 644 permissions
+CMD ["sh", "-c", "umask 022 && node server.js"]
