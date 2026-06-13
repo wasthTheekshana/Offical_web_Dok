@@ -9,18 +9,18 @@ export default function AboutStory({ imgs = {} }: { imgs?: Record<string, string
   const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 
   return (
-    <section ref={ref} className="bg-brand-cream py-28 lg:py-40 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
+    <section ref={ref} className="bg-brand-cream py-16 lg:py-40 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16">
 
         {/* Section tag */}
-        <div className="flex items-center gap-3 mb-20">
+        <div className="flex items-center gap-3 mb-10 lg:mb-20">
           <div className="w-8 h-px bg-brand-navy/30" />
           <span className="text-[10px] font-semibold tracking-[0.35em] uppercase text-brand-navy/40">
             Who We Are
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-24 items-center">
 
           {/* Left — pull quote + body */}
           <div>
@@ -29,7 +29,7 @@ export default function AboutStory({ imgs = {} }: { imgs?: Record<string, string
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="font-serif text-4xl lg:text-5xl text-brand-navy leading-[1.18] mb-10 tracking-tight"
+              className="font-serif text-2xl sm:text-3xl lg:text-5xl text-brand-navy leading-[1.18] mb-8 lg:mb-10 tracking-tight"
             >
               "Changing how organisations handle their most{' '}
               <em className="not-italic text-brand-gold">valuable asset</em>
@@ -81,7 +81,7 @@ export default function AboutStory({ imgs = {} }: { imgs?: Record<string, string
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative rounded-[2.5rem] overflow-hidden h-[380px] lg:h-[460px] bg-brand-beige"
+              className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden h-64 sm:h-80 lg:h-[460px] bg-brand-beige"
             >
               <motion.img
                 style={{ y: imgY }}
@@ -102,7 +102,7 @@ export default function AboutStory({ imgs = {} }: { imgs?: Record<string, string
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="relative rounded-[2rem] overflow-hidden h-44 bg-brand-beige"
+              className="relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden h-36 sm:h-44 bg-brand-beige"
             >
               <img
                 src={imgs['building'] || '/images/building.jpg'}

@@ -68,7 +68,7 @@ export default function TeamCards() {
               className="group relative rounded-3xl overflow-hidden border border-[#E8EDF5] hover:border-transparent hover:shadow-card-hover transition-all duration-500"
             >
               {/* Photo */}
-              <div className="relative h-72 overflow-hidden bg-gradient-to-br from-[#003B8E]/10 to-[#0072CE]/10">
+              <div className="relative h-56 sm:h-64 md:h-72 overflow-hidden bg-gradient-to-br from-[#003B8E]/10 to-[#0072CE]/10">
                 <img
                   src={m.img}
                   alt={m.role}
@@ -88,7 +88,7 @@ export default function TeamCards() {
               </div>
 
               {/* Content */}
-              <div className="p-6 bg-white">
+              <div className="p-4 sm:p-5 md:p-6 bg-white">
                 <div
                   className="text-[10px] font-black uppercase tracking-widest mb-1"
                   style={{ color: m.color }}

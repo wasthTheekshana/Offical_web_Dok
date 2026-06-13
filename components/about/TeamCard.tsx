@@ -38,7 +38,7 @@ export default function TeamCard({ member, i }: { member: TeamMember; i: number 
         onMouseLeave={handleLeave}
         className="group relative rounded-[2rem] overflow-hidden bg-brand-beige cursor-pointer"
       >
-        <div className="relative h-[380px] overflow-hidden">
+        <div className="relative h-[260px] sm:h-[320px] md:h-[380px] overflow-hidden">
           {member.photo_url ? (
             <img
               src={member.photo_url}
@@ -55,9 +55,9 @@ export default function TeamCard({ member, i }: { member: TeamMember; i: number 
             <p className="text-white/75 text-xs leading-relaxed">{member.bio}</p>
           </div>
         </div>
-        <div className="p-6 flex items-start justify-between">
+        <div className="p-4 sm:p-5 md:p-6 flex items-start justify-between">
           <div>
-            <div className="font-serif text-xl text-brand-navy">{member.role}</div>
+            <div className="font-serif text-base sm:text-xl text-brand-navy">{member.role}</div>
             <div className="text-[11px] tracking-widest uppercase text-brand-navy/40 mt-1">{member.name}</div>
           </div>
           <div className="w-9 h-9 rounded-full bg-brand-navy/08 flex items-center justify-center group-hover:bg-brand-navy group-hover:text-white transition-all duration-300 text-brand-navy">

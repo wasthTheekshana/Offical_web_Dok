@@ -40,10 +40,12 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
   return (
     <div className="relative w-full">
       {/* Card row */}
-      <div className="flex items-stretch justify-center gap-4 px-12 py-2">
+      <div className="flex items-stretch justify-center gap-3 sm:gap-4 px-8 sm:px-12 py-2 overflow-hidden">
         {visible.map(({ member: m, offset }) => {
           const isActive = offset === 0;
           const isHovered = hovered === m.id;
+          // On mobile show only the active card full-width; on sm+ show multi-card with fixed widths
+          const mobileHide = !isActive ? 'hidden sm:flex' : 'flex';
 
           return (
             <motion.div
@@ -53,8 +55,8 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
                 opacity: offset === -1 || offset === 2 ? 0.5 : 1,
               }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className={`relative flex-shrink-0 rounded-[1.75rem] overflow-hidden ${isActive ? 'w-[270px]' : 'w-[230px]'}`}
-              style={{ height: 420 }}
+              className={`${mobileHide} relative flex-shrink-0 rounded-[1.75rem] overflow-hidden ${isActive ? 'w-full sm:w-[270px]' : 'sm:w-[230px]'}`}
+              style={{ height: 'clamp(320px, 80vw, 420px)' }}
               onMouseEnter={() => setHovered(m.id)}
               onMouseLeave={() => setHovered(null)}
             >
@@ -121,14 +123,14 @@ export default function TeamCarousel({ members }: { members: TeamMember[] }) {
         <>
           <button
             onClick={() => go(active - 1)}
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
             aria-label="Previous"
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={() => go(active + 1)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
             aria-label="Next"
           >
             <ChevronRight size={18} />

@@ -4,16 +4,16 @@ import { motion } from 'framer-motion';
 
 export default function AboutAbans({ imgs = {} }: { imgs?: Record<string, string> }) {
   return (
-    <section className="bg-[#080C1A] py-28 lg:py-40 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
+    <section className="bg-[#080C1A] py-16 lg:py-40 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16">
 
         {/* Top eyebrow */}
-        <div className="flex items-center gap-3 mb-20">
+        <div className="flex items-center gap-3 mb-10 lg:mb-20">
           <div className="w-8 h-px bg-white/20" />
           <span className="text-[10px] font-semibold tracking-[0.35em] uppercase text-white/30">Our Heritage</span>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-32 items-center">
 
           {/* Left — image mosaic */}
           <motion.div
@@ -21,9 +21,9 @@ export default function AboutAbans({ imgs = {} }: { imgs?: Record<string, string
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="relative mb-10 lg:mb-0"
           >
-            <div className="rounded-[2.5rem] overflow-hidden h-[400px] lg:h-[520px]">
+            <div className="rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden h-64 sm:h-80 lg:h-[520px]">
               <img
                 src={imgs['building'] || '/images/building.jpg'}
                 alt="DOK Solutions Headquarters"
@@ -38,7 +38,7 @@ export default function AboutAbans({ imgs = {} }: { imgs?: Record<string, string
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="absolute -bottom-6 -right-2 lg:right-8 bg-[#F5A623] text-[#080C1A] rounded-2xl px-6 py-5 shadow-2xl"
+              className="absolute -bottom-5 right-2 sm:right-4 lg:right-8 bg-[#F5A623] text-[#080C1A] rounded-2xl px-4 py-3 sm:px-6 sm:py-5 shadow-2xl"
             >
               <div className="font-serif text-4xl font-bold leading-none">50+</div>
               <div className="text-[10px] font-semibold tracking-[0.2em] uppercase mt-1 opacity-70">Years of Heritage</div>
@@ -52,7 +52,7 @@ export default function AboutAbans({ imgs = {} }: { imgs?: Record<string, string
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-              className="font-serif text-5xl lg:text-6xl text-white leading-[1.1] mb-8"
+              className="font-serif text-3xl sm:text-4xl lg:text-6xl text-white leading-[1.1] mb-6 lg:mb-8"
             >
               Proudly Part of<br />
               <span className="text-[#F5A623]">AB Securitas (Pvt) Ltd</span>
