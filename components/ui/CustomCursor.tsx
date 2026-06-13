@@ -7,6 +7,9 @@ export default function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Don't show custom cursor on touch/mobile devices
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
     const dot  = dotRef.current!;
     const ring = ringRef.current!;
 
