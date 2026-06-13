@@ -5,6 +5,13 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
+
+# Build-time public env vars (NEXT_PUBLIC_* are baked in at build time)
+ARG NEXT_PUBLIC_GTM_ID
+ARG NEXT_PUBLIC_META_PIXEL_ID
+ENV NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID
+ENV NEXT_PUBLIC_META_PIXEL_ID=$NEXT_PUBLIC_META_PIXEL_ID
+
 RUN npm run build
 
 # ── Production image ──────────────────────────────────────────────────────────
